@@ -1,0 +1,2974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>WILD ROOTS JUNGLE SAFARI LODGE | Complete Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0a2f1f;
+            --primary-medium: #1b4d3e;
+            --accent-gold: #c9a24b;
+            --accent-sage: #9bae7b;
+            --accent-terra: #b76e4b;
+            --cream-light: #faf7f0;
+            --pure-white: #ffffff;
+            --text-dark: #1e2e24;
+            --shadow-md: 0 20px 40px -15px rgba(0,0,0,0.3);
+            --shadow-lg: 0 30px 50px -20px rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Floating Buttons Container */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .whatsapp-float {
+            background-color: #25d366;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .whatsapp-float i {
+            font-size: 38px;
+            color: white;
+        }
+
+        .go-top-float {
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .go-top-float.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .go-top-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            background-color: var(--primary-dark);
+        }
+
+        .go-top-float i {
+            font-size: 28px;
+            color: white;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        .whatsapp-tooltip, .gotop-tooltip {
+            position: absolute;
+            right: 75px;
+            background: #075e54;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip,
+        .go-top-float:hover .gotop-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 85px;
+        }
+
+        /* REVIEWS SECTION STYLES */
+        .reviews-compact {
+            background: linear-gradient(135deg, #ffffff, #faf7f0);
+            border-radius: 30px;
+            padding: 2rem 1.5rem;
+            margin: 3rem 0;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(201,162,75,0.2);
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .reviews-header h3 {
+            font-size: 1.6rem;
+            color: #0a2f1f;
+            font-family: 'Playfair Display', serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reviews-header h3 i {
+            color: #c9a24b;
+            font-size: 1.3rem;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0f0f0;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating-badge .stars {
+            color: #f5b342;
+            letter-spacing: 2px;
+        }
+
+        .reviews-scroll-container {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .reviews-scroll {
+            display: flex;
+            flex-direction: column;
+            animation: scrollReviews 30s linear infinite;
+        }
+
+        .reviews-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollReviews {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .review-item {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .review-item:hover {
+            border-color: #c9a24b;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(201,162,75,0.15);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.6rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            background: #0a2f1f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a24b;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #c9a24b;
+        }
+
+        .reviewer-info h4 {
+            font-size: 0.95rem;
+            color: #0a2f1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-stars {
+            color: #f5b342;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .review-text {
+            font-size: 0.85rem;
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #718096;
+        }
+
+        .review-date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .google-badge {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .google-badge i {
+            color: #c9a24b;
+        }
+
+        .view-all-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .view-all-link a {
+            color: #c9a24b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+            padding: 8px 20px;
+            border-radius: 40px;
+            background: rgba(201,162,75,0.1);
+        }
+
+        .view-all-link a:hover {
+            gap: 10px;
+            color: #0a2f1f;
+            background: rgba(201,162,75,0.2);
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--primary-dark);
+            color: var(--cream-light);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent-gold);
+            box-shadow: var(--shadow-md);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo h1 {
+            font-size: clamp(1.2rem, 4vw, 2rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5e7c8, var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo h1 span {
+            font-weight: 400;
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent-sage), #f5e7c8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo p {
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-sage);
+        }
+
+        .menu-toggle { display: none; }
+        .hamburger-label { display: flex; flex-direction: column; cursor: pointer; padding: 10px 5px; z-index: 1001; }
+        .hamburger-label span { width: 30px; height: 3px; background: var(--accent-gold); margin: 3px 0; border-radius: 3px; transition: 0.3s; }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(280px, 80%);
+            height: 100vh;
+            background: var(--primary-dark);
+            padding-top: 80px;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            transition: right 0.3s ease;
+            z-index: 999;
+            border-left: 3px solid var(--accent-gold);
+            overflow-y: auto;
+        }
+        .sidebar ul { list-style: none; padding: 20px; }
+        .sidebar li { margin: 20px 0; }
+        .sidebar a { color: white; text-decoration: none; font-size: 1.2rem; display: flex; align-items: center; gap: 15px; padding: 12px 15px; border-radius: 8px; transition: 0.3s; }
+        .sidebar a i { color: var(--accent-gold); width: 25px; }
+        .sidebar a:hover { background: var(--accent-terra); transform: translateX(5px); }
+        #menu-toggle:checked ~ .sidebar { right: 0; }
+        #menu-toggle:checked + .hamburger-label span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        #menu-toggle:checked + .hamburger-label span:nth-child(2) { opacity: 0; }
+        #menu-toggle:checked + .hamburger-label span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 998; }
+        #menu-toggle:checked ~ .sidebar-overlay { display: block; }
+
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            width: 100%;
+            height: 90vh;
+            overflow: hidden;
+        }
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            flex: 0 0 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(10,47,31,0.7), rgba(27,77,62,0.7));
+        }
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            width: 90%;
+            max-width: 1000px;
+            z-index: 2;
+        }
+        .slide-content h2 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .slide-content h2 span {
+            color: var(--accent-gold);
+            display: block;
+            font-size: 0.7em;
+            font-weight: 400;
+            font-style: italic;
+        }
+        .slide-content p {
+            font-size: clamp(0.9rem, 3vw, 1.2rem);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 1.5rem;
+            border-radius: 50px;
+            display: inline-block;
+        }
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: var(--accent-gold);
+            transform: scale(1.2);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin: 3rem 0 2rem;
+            color: var(--primary-dark);
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-gold);
+        }
+        .section-title::after {
+            content: '✦';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: var(--accent-terra);
+            background: var(--cream-light);
+            padding: 0 10px;
+        }
+        .welcome-heading {
+            text-align: center;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            color: var(--primary-dark);
+            margin: 2rem 0;
+        }
+
+        /* About Section */
+        .about-mission {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 768px) {
+            .about-mission {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .about-card, .mission-card {
+            background: var(--pure-white);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--accent-sage);
+        }
+        .about-card h3, .mission-card h3 {
+            font-size: 1.5rem;
+            border-left: 4px solid var(--accent-gold);
+            padding-left: 15px;
+            margin-bottom: 1rem;
+        }
+
+        /* Wellness Sections */
+        .wellness-section {
+            background: var(--pure-white);
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .wellness-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .wellness-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary-dark);
+        }
+        .wellness-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 600px) {
+            .wellness-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .wellness-card {
+            background: #f9f6ef;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .wellness-card:hover {
+            transform: translateY(-5px);
+        }
+        .wellness-card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+        .wellness-card .card-text {
+            padding: 1.5rem;
+        }
+        .wellness-card .card-text h3 {
+            color: var(--accent-terra);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        .dual-image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .dual-image-row img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid var(--accent-sage);
+        }
+
+        /* Activities Grid */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 500px) {
+            .activities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 900px) {
+            .activities-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1100px) {
+            .activities-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        .activity-card {
+            background: var(--pure-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .card-image {
+            height: 180px;
+            overflow: hidden;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .card-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-terra);
+            margin: 0.5rem 0;
+        }
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+        .btn-book, .btn-detail {
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-book {
+            background: linear-gradient(135deg, #c9a24b, #dbb268);
+            color: var(--primary-dark);
+        }
+        .btn-detail {
+            background: var(--primary-dark);
+            color: var(--cream-light);
+            border: 1px solid var(--accent-gold);
+        }
+
+        /* Gallery Preview */
+        .gallery-preview {
+            background: var(--pure-white);
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .preview-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 600px) {
+            .preview-header {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        @media (min-width: 500px) {
+            .preview-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 800px) {
+            .preview-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1000px) {
+            .preview-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        .preview-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .preview-grid img:hover {
+            transform: scale(1.02);
+            border: 2px solid var(--accent-gold);
+        }
+        .btn-viewmore {
+            background: var(--primary-dark);
+            color: var(--cream-light);
+            border: 2px solid var(--accent-gold);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Dining Section */
+        .dining-section {
+            background: #faf7f0;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .dining-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .dining-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+        }
+        .dining-showcase {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .dining-showcase {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .dining-image {
+            height: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .dining-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .dining-content h3 {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        .dining-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .dining-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .dining-features li i {
+            color: var(--accent-gold);
+        }
+        .menu-preview {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 600px) {
+            .menu-preview {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+        .menu-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Booking Process Section */
+        .booking-process {
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+        .process-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .process-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+        }
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 768px) {
+            .timeline {
+                flex-direction: row;
+                justify-content: space-between;
+                position: relative;
+            }
+            .timeline::before {
+                content: '';
+                position: absolute;
+                top: 25px;
+                left: 50px;
+                right: 50px;
+                height: 2px;
+                background: #e2e8f0;
+                z-index: 1;
+            }
+        }
+        .timeline-step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin: 0 auto 0.8rem;
+            border: 3px solid var(--accent-gold);
+        }
+        .step-title {
+            font-weight: 600;
+        }
+
+        /* COMBO BOOKING SECTION WITH PACKAGES */
+        .combo-booking-section {
+            background: linear-gradient(135deg, #ffffff, #fef9f0);
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .combo-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .combo-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary-dark);
+        }
+
+        /* Package Tabs */
+        .package-tabs {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .package-tab {
+            background: transparent;
+            border: 2px solid var(--accent-gold);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--primary-dark);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .package-tab:hover {
+            background: var(--accent-gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .package-tab.active {
+            background: var(--accent-gold);
+            color: white;
+            box-shadow: 0 5px 15px rgba(201,162,75,0.3);
+        }
+
+        /* Custom Combo Activities */
+        .combo-activities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .combo-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 2px solid #e8e8e8;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .combo-item.selected {
+            border-color: var(--accent-gold);
+            background: #fef9f0;
+            box-shadow: 0 5px 15px rgba(201,162,75,0.2);
+        }
+
+        .combo-item input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-gold);
+        }
+
+        .combo-item-info {
+            flex: 1;
+        }
+
+        .combo-item-info h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .combo-item-info p {
+            color: var(--accent-terra);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Safari Package Card */
+        .safari-package-card {
+            background: white;
+            border-radius: 25px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid rgba(201,162,75,0.2);
+        }
+
+        .package-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f4f8;
+        }
+
+        .package-header h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin: 0;
+        }
+
+        .package-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-terra);
+        }
+
+        .package-price span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .package-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .package-features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .package-features li i {
+            width: 25px;
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+        }
+
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .package-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .package-images img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        /* Safari Highlights */
+        .safari-highlights {
+            background: #fef9f0;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .safari-highlights h4 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .highlight-item i {
+            width: 30px;
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .highlight-item span {
+            font-size: 0.9rem;
+            color: #4a5568;
+        }
+
+        .book-package-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #c9a24b, #dbb268);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 1rem;
+        }
+
+        .book-package-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201,162,75,0.4);
+        }
+
+        .combo-total {
+            background: var(--primary-dark);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .combo-total span {
+            color: var(--accent-gold);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .combo-book-btn {
+            background: linear-gradient(135deg, #c9a24b, #dbb268);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .combo-book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201,162,75,0.4);
+        }
+
+        /* Full Gallery Page */
+        .full-gallery-page {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        .close-gallery-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-dark);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border: 2px solid var(--accent-gold);
+        }
+        .gallery-categories {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .category-btn {
+            background: #f0f0f0;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn.active {
+            background: var(--accent-gold);
+            color: white;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        @media (min-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (min-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (min-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        .instagram-feed {
+            background: #faf7f0;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .insta-link {
+            background: var(--primary-dark);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Detail Pages */
+        .detail-page {
+            display: none;
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            margin: 2rem auto;
+            box-shadow: var(--shadow-lg);
+            max-width: 1000px;
+            position: relative;
+        }
+        .detail-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f5f5f5;
+            z-index: 10;
+        }
+        .detail-badge {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .detail-title {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+        .detail-rating {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stars {
+            color: #ffc107;
+            font-size: 1.1rem;
+        }
+        .detail-image-gallery {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .main-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+        .side-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .side-images img {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .detail-video video {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        .detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-terra);
+            margin: 1rem 0;
+        }
+        .detail-description {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        .booking-button {
+            background: linear-gradient(135deg, #0a2f1f, #1b4d3e);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        .booking-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Booking Lightbox */
+        .booking-lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(5px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        .booking-lightbox.active {
+            display: flex;
+        }
+        .booking-container {
+            background: linear-gradient(135deg, #ffffff, #fef9f0);
+            border-radius: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-gold);
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(60px) scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        .booking-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f0f0f0;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .booking-close:hover {
+            background: var(--accent-gold);
+            color: white;
+            transform: rotate(90deg);
+        }
+        .booking-header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+        .booking-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+        }
+        .leader-image-section {
+            text-align: center;
+            margin-bottom: 1.8rem;
+            padding: 1rem;
+            background: #f9f6ef;
+            border-radius: 20px;
+        }
+        .leader-image-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        .leader-image-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-gold);
+        }
+        .leader-image-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed var(--accent-gold);
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+        .selected-activities-list {
+            background: #f9f6ef;
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+        }
+        .booking-form-group {
+            margin-bottom: 1.2rem;
+        }
+        .booking-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .booking-form-group label i {
+            color: var(--accent-gold);
+            margin-right: 8px;
+        }
+        .booking-form-group input,
+        .booking-form-group select,
+        .booking-form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .booking-form-group input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+        .phone-group {
+            display: flex;
+            gap: 10px;
+        }
+        .phone-group select {
+            width: 120px;
+        }
+        .member-count {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #f9f6ef;
+            padding: 0.8rem;
+            border-radius: 50px;
+            justify-content: center;
+        }
+        .member-count button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            font-size: 1.3rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .member-count span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            min-width: 50px;
+            text-align: center;
+        }
+        .price-breakdown {
+            background: #f9f6ef;
+            padding: 1rem;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+        .price-breakdown p {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .total-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-terra);
+            border-top: 2px solid var(--accent-gold);
+            padding-top: 0.8rem;
+            margin-top: 0.5rem;
+        }
+        .submit-booking-btn {
+            background: linear-gradient(135deg, #c9a24b, #dbb268);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+        .submit-booking-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border: 3px solid var(--accent-gold);
+            border-radius: 10px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+        }
+
+        footer {
+            background: var(--primary-dark);
+            color: var(--cream-light);
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+            border-top: 3px solid var(--accent-gold);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .footer-col h4 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        .footer-col a {
+            color: #9bae7b;
+            text-decoration: none;
+        }
+        .social-links i {
+            font-size: 1.5rem;
+            color: var(--accent-sage);
+            margin-right: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .social-links i:hover {
+            color: var(--accent-gold);
+        }
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid var(--accent-gold);
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--accent-sage);
+            margin-top: 2rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            .package-grid {
+                grid-template-columns: 1fr;
+            }
+            .package-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .package-tabs {
+                gap: 10px;
+            }
+            .package-tab {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>WILD ROOTS <span>Jungle Safari</span></h1>
+                <p>WILD LODGE</p>
+            </div>
+            <label for="menu-toggle" class="hamburger-label">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
+    </header>
+
+    <!-- Floating Buttons Container -->
+    <div class="floating-buttons">
+        <a href="#" class="go-top-float" id="goTopBtn">
+            <i class="fas fa-arrow-up"></i>
+            <span class="gotop-tooltip">Go to Top</span>
+        </a>
+        <a href="https://wa.me/9779841234567?text=Hello!%20I'm%20interested%20in%20booking%20a%20safari%20at%20WILD%20ROOTS%20Jungle%20Safari.%20Please%20share%20more%20details." 
+           class="whatsapp-float" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <i class="fab fa-whatsapp"></i>
+            <span class="whatsapp-tooltip">Chat with us!</span>
+        </a>
+    </div>
+
+    <div class="sidebar">
+        <ul>
+            <li><a href="#" class="sidebar-link" data-target="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about" class="sidebar-link" data-target="about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="#yoga" class="sidebar-link" data-target="yoga"><i class="fas fa-hand-sparkles"></i> Yoga</a></li>
+            <li><a href="#sound" class="sidebar-link" data-target="sound"><i class="fas fa-music"></i> Sound Healing</a></li>
+            <li><a href="#village" class="sidebar-link" data-target="village"><i class="fas fa-people-arrows"></i> Village Tour</a></li>
+            <li><a href="#safari" class="sidebar-link" data-target="safari"><i class="fas fa-safari"></i> Activities</a></li>
+            <li><a href="#combo" class="sidebar-link" data-target="combo"><i class="fas fa-layer-group"></i> Combo Deals</a></li>
+            <li><a href="#booking-steps" class="sidebar-link" data-target="booking-steps"><i class="fas fa-calendar-check"></i> Booking Steps</a></li>
+            <li><a href="#dining" class="sidebar-link" data-target="dining"><i class="fas fa-utensils"></i> Dining</a></li>
+            <li><a href="#reviews" class="sidebar-link" data-target="reviews"><i class="fas fa-star"></i> Reviews</a></li>
+            <li><a href="#" class="sidebar-link" data-target="gallery"><i class="fas fa-camera"></i> Gallery</a></li>
+            <li><a href="#contact" class="sidebar-link" data-target="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <div class="sidebar-overlay" onclick="document.getElementById('menu-toggle').checked = false;"></div>
+
+    <!-- HERO SLIDER -->
+    <section class="hero-slider" id="home">
+        <div class="slides-wrapper" id="slidesWrapper"></div>
+        <div class="slider-dots" id="sliderDots"></div>
+    </section>
+
+    <!-- MAIN PAGE SECTIONS -->
+    <div id="mainPageSections">
+        <main class="container">
+            <div class="welcome-heading">Welcome to WILD ROOTS Jungle Safari</div>
+            
+            <!-- ABOUT SECTION -->
+            <div class="about-mission" id="about">
+                <div class="about-card">
+                    <h3><i class="fas fa-tree"></i> About Us</h3>
+                    <p>Wild Roots Jungle Safari & Culture Homestay is a family-run retreat in Bachhauli village, gateway to Chitwan National Park. For over 15 years, we've been sharing the magic of the jungle with authentic Tharu hospitality.</p>
+                </div>
+                <div class="mission-card">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>Responsible tourism that benefits guests & community. We employ local guides, support conservation efforts, and promote sustainable travel practices.</p>
+                </div>
+            </div>
+
+            <!-- YOGA SECTION -->
+            <div class="wellness-section" id="yoga">
+                <div class="wellness-header">
+                    <h2>🧘 Yoga in the Wild</h2>
+                    <p>Reconnect with nature through morning and evening yoga sessions</p>
+                </div>
+                <div class="wellness-grid">
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Sunrise yoga">
+                        <div class="card-text">
+                            <h3>Sunrise Yoga</h3>
+                            <p>Start your day with gentle asanas as the jungle awakens. Overlooking the Rapti river, our open-air deck offers peace and fresh air.</p>
+                        </div>
+                    </div>
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=600&h=400&fit=crop" alt="Evening meditation">
+                        <div class="card-text">
+                            <h3>Evening Meditation</h3>
+                            <p>Wind down with guided meditation accompanied by the sounds of the forest – birds, cicadas, and distant calls of deer.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dual-image-row">
+                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=600&h=400&fit=crop" alt="Yoga pose">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&h=400&fit=crop" alt="Yoga group">
+                </div>
+            </div>
+
+            <!-- SOUND HEALING SECTION -->
+            <div class="wellness-section" id="sound">
+                <div class="wellness-header">
+                    <h2>🔔 Sound Healing</h2>
+                    <p>Ancient vibrational therapy to restore balance</p>
+                </div>
+                <div class="wellness-grid">
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&h=400&fit=crop" alt="Singing bowls">
+                        <div class="card-text">
+                            <h3>Himalayan Singing Bowls</h3>
+                            <p>Experience deep relaxation with the resonant tones of singing bowls. Sessions are held in our tranquil bamboo hut.</p>
+                        </div>
+                    </div>
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Sound bath">
+                        <div class="card-text">
+                            <h3>Forest Sound Bath</h3>
+                            <p>Lie down and let the gong, chimes, and nature sounds wash over you. A unique outdoor sound bath surrounded by sal trees.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dual-image-row">
+                    <img src="https://images.unsplash.com/photo-1631549916768-4119b4121f5c?w=600&h=400&fit=crop" alt="Tibetan bowls">
+                    <img src="https://images.unsplash.com/photo-1617648621109-04e53b70b6b0?w=600&h=400&fit=crop" alt="Gong healing">
+                </div>
+            </div>
+
+            <!-- VILLAGE TOUR SECTION -->
+            <div class="wellness-section" id="village">
+                <div class="wellness-header">
+                    <h2>🚶 Village Tour</h2>
+                    <p>Walk through Bachhauli and experience authentic Tharu life</p>
+                </div>
+                <div class="wellness-grid">
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=600&h=400&fit=crop" alt="Tharu village">
+                        <div class="card-text">
+                            <h3>Heritage Walk</h3>
+                            <p>Explore traditional mud houses with tribal art, meet local artisans, and learn about Tharu customs and everyday life.</p>
+                        </div>
+                    </div>
+                    <div class="wellness-card">
+                        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=600&h=400&fit=crop" alt="Village interaction">
+                        <div class="card-text">
+                            <h3>Community Interaction</h3>
+                            <p>Share stories with village elders, watch women make handicrafts, and enjoy a cup of herbal tea in a local home.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dual-image-row">
+                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b9695a3?w=600&h=400&fit=crop" alt="Tharu women">
+                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=600&h=400&fit=crop" alt="Village children">
+                </div>
+            </div>
+
+            <!-- ACTIVITIES SECTION -->
+            <h2 class="section-title" id="safari">Jungle & Culture Activities</h2>
+            <div class="activities-grid" id="activitiesGrid"></div>
+
+            <!-- BOOK YOUR SAFARI IN 4 EASY STEPS SECTION -->
+            <div class="booking-process" id="booking-steps">
+                <div class="process-header">
+                    <h2>📋 Book Your Safari in 4 Easy Steps</h2>
+                    <p>Simple, secure, and instant confirmation</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Choose Safari</div>
+                        <p style="font-size: 0.8rem; color: #666;">Select your preferred activity</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Select Date</div>
+                        <p style="font-size: 0.8rem; color: #666;">Pick your preferred date</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Guest Details</div>
+                        <p style="font-size: 0.8rem; color: #666;">Fill your information</p>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Confirm & Pay</div>
+                        <p style="font-size: 0.8rem; color: #666;">Secure payment confirmation</p>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-lock" style="color: #c9a24b;"></i> Secure Booking • Free Cancellation • Best Price Guarantee
+                </div>
+            </div>
+
+            <!-- COMBO BOOKING SECTION WITH PACKAGES -->
+            <div class="combo-booking-section" id="combo">
+                <div class="combo-header">
+                    <h2>🎯 Create Your Perfect Safari Experience</h2>
+                    <p>Choose from our curated packages or build your own combo</p>
+                </div>
+                
+                <!-- Package Tabs -->
+                <div class="package-tabs">
+                    <button class="package-tab active" onclick="showPackageType('custom')">✨ Custom Combo</button>
+                    <button class="package-tab" onclick="showPackageType('package2d')">🌿 2 Days / 3 Nights</button>
+                    <button class="package-tab" onclick="showPackageType('package3d')">🌿 3 Days / 4 Nights Ultimate</button>
+                </div>
+                
+                <!-- CUSTOM COMBO (Original) -->
+                <div id="custom-combo" class="package-content">
+                    <div class="combo-activities" id="comboActivitiesList"></div>
+                </div>
+                
+                <!-- 2 DAYS / 3 NIGHTS PACKAGE -->
+                <div id="package-2d" class="package-content" style="display: none;">
+                    <div class="safari-package-card">
+                        <div class="package-header">
+                            <h3>🌿 2 Days / 3 Nights Jungle Experience</h3>
+                            <div class="package-price">₹12,500 <span>per person</span></div>
+                        </div>
+                        <div class="package-grid">
+                            <div class="package-features">
+                                <h4><i class="fas fa-check-circle"></i> Package Includes:</h4>
+                                <ul>
+                                    <li><i class="fas fa-glass-cheers"></i> Arrival and welcome drink</li>
+                                    <li><i class="fas fa-binoculars"></i> Riverside & jungle watchtower visit</li>
+                                    <li><i class="fas fa-water"></i> Canoe safari on the river</li>
+                                    <li><i class="fas fa-hiking"></i> Guided jungle walk in core forest</li>
+                                    <li><i class="fas fa-utensils"></i> Jungle lunch experience</li>
+                                    <li><i class="fas fa-tree"></i> Buffer zone nature walk</li>
+                                </ul>
+                            </div>
+                            <div class="package-image">
+                                <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=350&fit=crop" alt="Jungle Experience">
+                            </div>
+                        </div>
+                        <button class="book-package-btn" onclick="bookPackage('2 Days / 3 Nights Jungle Experience', 12500)">
+                            <i class="fas fa-gift"></i> Book This Package
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 3 DAYS / 4 NIGHTS ULTIMATE PACKAGE -->
+                <div id="package-3d" class="package-content" style="display: none;">
+                    <div class="safari-package-card">
+                        <div class="package-header">
+                            <h3>🌿 3 Days / 4 Nights Ultimate Safari</h3>
+                            <div class="package-price">₹18,500 <span>per person</span></div>
+                        </div>
+                        <div class="package-grid">
+                            <div class="package-features">
+                                <h4><i class="fas fa-check-circle"></i> Package Includes:</h4>
+                                <ul>
+                                    <li><i class="fas fa-water"></i> Canoe safari & wildlife observation</li>
+                                    <li><i class="fas fa-hiking"></i> Deep jungle trekking with naturalist guide</li>
+                                    <li><i class="fas fa-utensils"></i> Lunch in the heart of the jungle</li>
+                                    <li><i class="fas fa-tree"></i> Buffer zone forest walk</li>
+                                    <li><i class="fas fa-car"></i> Jeep safari adventure (3 PM – 6 PM)</li>
+                                    <li><i class="fas fa-dove"></i> Bird watching & nature discovery</li>
+                                </ul>
+                            </div>
+                            <div class="package-images">
+                                <img src="https://images.unsplash.com/photo-1505229061016-24751d664d98?w=400&h=250&fit=crop" alt="Wildlife">
+                                <img src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=250&fit=crop" alt="Bird Watching">
+                            </div>
+                        </div>
+                        <div class="safari-highlights">
+                            <h4>🐾 Safari Highlights</h4>
+                            <div class="highlights-grid">
+                                <div class="highlight-item">
+                                    <i class="fas fa-water"></i>
+                                    <span>Canoe ride with crocodile & bird watching</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-hiking"></i>
+                                    <span>Guided jungle trekking with expert naturalist</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-rhino"></i>
+                                    <span>Wildlife sightings: one-horned rhino, deer, sloth bear, birds</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-apple-alt"></i>
+                                    <span>Organic local food</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-home"></i>
+                                    <span>Eco-friendly lodge with traditional design</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-leaf"></i>
+                                    <span>Peaceful jungle atmosphere</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="book-package-btn" onclick="bookPackage('3 Days / 4 Nights Ultimate Safari', 18500)">
+                            <i class="fas fa-gift"></i> Book Ultimate Safari
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="combo-total">
+                    <h3>Total Amount</h3>
+                    <span id="comboTotalPrice">₹0</span>
+                </div>
+                <button class="combo-book-btn" onclick="openComboBooking()">
+                    <i class="fas fa-gift"></i> Book Selected Activities
+                </button>
+            </div>
+
+            <!-- GALLERY PREVIEW -->
+            <div class="gallery-preview">
+                <div class="preview-header">
+                    <h3><i class="fas fa-camera-retro"></i> Jungle Moments</h3>
+                    <button class="btn-viewmore" id="viewMoreBtn"><i class="fas fa-images"></i> View More Images</button>
+                </div>
+                <div class="preview-grid" id="previewGrid"></div>
+            </div>
+
+            <!-- DINING SECTION -->
+            <div class="dining-section" id="dining">
+                <div class="dining-header">
+                    <h2>Taste of the Jungle</h2>
+                    <p>Authentic Tharu cuisine and fresh local ingredients</p>
+                </div>
+                <div class="dining-showcase">
+                    <div class="dining-image">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&h=400&fit=crop" alt="Tharu Dining">
+                    </div>
+                    <div class="dining-content">
+                        <h3>Traditional Tharu Meals</h3>
+                        <p>Experience the unique flavors of Tharu cuisine, prepared with traditional recipes passed down through generations.</p>
+                        <ul class="dining-features">
+                            <li><i class="fas fa-check-circle"></i> Farm-to-table organic vegetables</li>
+                            <li><i class="fas fa-check-circle"></i> Live cooking demonstrations</li>
+                            <li><i class="fas fa-check-circle"></i> Dietary accommodations available</li>
+                            <li><i class="fas fa-check-circle"></i> Dinner under the stars</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="menu-preview">
+                    <div class="menu-item"><img src="https://images.unsplash.com/photo-1626777552784-797072dfaf64?w=300&h=200&fit=crop" alt="Dhikri"><h4>Dhikri</h4><p>Rice flour bread</p></div>
+                    <div class="menu-item"><img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=300&h=200&fit=crop" alt="Ghonghi"><h4>Ghonghi</h4><p>Snail curry</p></div>
+                    <div class="menu-item"><img src="https://images.unsplash.com/photo-1626132647523-66b06c92dff9?w=300&h=200&fit=crop" alt="Bagiya"><h4>Bagiya</h4><p>Lentil dumplings</p></div>
+                </div>
+            </div>
+
+            <!-- COMPACT REVIEWS SECTION WITH AUTO-SCROLL -->
+            <div class="reviews-compact" id="reviews">
+                <div class="reviews-header">
+                    <h3>
+                        <i class="fas fa-star" style="color: #c9a24b;"></i> 
+                        Guest Reviews
+                        <span class="rating-badge">
+                            <span class="stars">★★★★★</span> 4.8
+                        </span>
+                    </h3>
+                    <p style="font-size: 0.8rem; color: #4a5568; margin-top: 0.3rem;">1,247+ reviews on Google Maps</p>
+                </div>
+
+                <div class="reviews-scroll-container">
+                    <div class="reviews-scroll" id="reviewsScroll"></div>
+                </div>
+
+                <div class="view-all-link">
+                    <a href="https://www.google.com/maps/place/Wild+Roots+Jungle+Safari+Lodge/@27.5707039,84.2356505,17z/" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-google"></i> Read all reviews on Google Maps
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- CONTACT SECTION -->
+            <div id="contact" style="background: #f0f0f0; padding: 2rem; border-radius: 20px; margin: 2rem 0; text-align: center;">
+                <h3 style="color: var(--primary-dark);">📞 Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Bachhauli, Sauraha, Chitwan, Nepal</p>
+                <p><i class="fas fa-phone"></i> +977 9841234567</p>
+                <p><i class="fas fa-envelope"></i> info@wildrootsjunglesafari.com</p>
+                <p><i class="fab fa-instagram"></i> @wildrootsjunglesafari</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- FULL GALLERY PAGE -->
+    <div class="container full-gallery-page" id="fullGalleryPage">
+        <div class="close-gallery-btn" id="closeGalleryBtn">✕</div>
+        <div class="gallery-header"><h2>Moments from the Jungle</h2><p>Browse through our complete photo gallery</p></div>
+        <div class="gallery-categories">
+            <button class="category-btn active" onclick="filterGallery('all', this)">All</button>
+            <button class="category-btn" onclick="filterGallery('wildlife', this)">Wildlife</button>
+            <button class="category-btn" onclick="filterGallery('culture', this)">Tharu Culture</button>
+            <button class="category-btn" onclick="filterGallery('accommodation', this)">Accommodation</button>
+            <button class="category-btn" onclick="filterGallery('activities', this)">Activities</button>
+        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
+        <div class="instagram-feed">
+            <div><i class="fab fa-instagram" style="font-size: 2rem; color: #c9a24b;"></i><div><h4>Follow us on Instagram</h4><p>@wildrootsjunglesafari</p></div></div>
+            <a href="#" class="insta-link" onclick="openInstagram(event)">Follow →</a>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightboxClose">✕</span>
+        <img class="lightbox-img" id="lightboxImg" src="">
+    </div>
+
+    <!-- BOOKING LIGHTBOX -->
+    <div class="booking-lightbox" id="bookingLightbox">
+        <div class="booking-container">
+            <div class="booking-close" id="bookingCloseBtn">✕</div>
+            <div class="booking-header">
+                <h3 id="bookingTitle">Book Your Experience</h3>
+                <p id="bookingPrice">WILD ROOTS Jungle Safari</p>
+            </div>
+            <div class="leader-image-section">
+                <label class="leader-image-label" for="leaderImageInput">
+                    <div id="leaderImagePreview"><div class="leader-image-placeholder"><i class="fas fa-camera"></i></div></div>
+                    <span><i class="fas fa-upload"></i> Upload Leader's Photo</span>
+                </label>
+                <input type="file" id="leaderImageInput" accept="image/*" style="display: none;">
+            </div>
+            <div id="selectedActivitiesList" class="selected-activities-list" style="display: none;">
+                <h4><i class="fas fa-list"></i> Selected Activities</h4>
+                <ul id="selectedActivitiesUl"></ul>
+            </div>
+            <form id="bookingForm">
+                <div class="booking-form-group">
+                    <label><i class="fas fa-user"></i> Full Name *</label>
+                    <input type="text" id="guestName" required placeholder="Enter your full name">
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fab fa-whatsapp"></i> WhatsApp Number *</label>
+                    <div class="phone-group">
+                        <select id="countryCode">
+                            <option value="+977">🇳🇵 +977 (Nepal)</option>
+                            <option value="+91">🇮🇳 +91 (India)</option>
+                            <option value="+1">🇺🇸 +1 (USA)</option>
+                            <option value="+44">🇬🇧 +44 (UK)</option>
+                            <option value="+61">🇦🇺 +61 (Australia)</option>
+                        </select>
+                        <input type="tel" id="whatsappNumber" placeholder="WhatsApp number" required>
+                    </div>
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-phone-alt"></i> Mobile Number *</label>
+                    <input type="tel" id="mobileNumber" placeholder="Mobile number for calls" required>
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-users"></i> Adults *</label>
+                    <div class="member-count">
+                        <button type="button" onclick="updateMembers(-1)">-</button>
+                        <span id="memberCount">1</span>
+                        <button type="button" onclick="updateMembers(1)">+</button>
+                    </div>
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-child"></i> Children (Below 3 years) - Free</label>
+                    <input type="number" id="kidsBelow3" min="0" value="0" onchange="updateTotalPrice()">
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-child"></i> Children (3-12 years) - Half Price</label>
+                    <input type="number" id="kidsAbove3" min="0" value="0" onchange="updateTotalPrice()">
+                </div>
+                <div class="price-breakdown" id="priceBreakdown">
+                    <p><span>Base Price:</span> <span id="basePriceDisplay">₹0</span></p>
+                    <p><span>Adults (x<span id="adultCount">1</span>):</span> <span id="adultTotalDisplay">₹0</span></p>
+                    <p><span>Kids (3-12 yrs):</span> <span id="kidsTotalDisplay">₹0</span></p>
+                    <div class="total-price" id="finalTotalDisplay">Total: ₹0</div>
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Preferred Date</label>
+                    <input type="date" id="preferredDate">
+                </div>
+                <div class="booking-form-group">
+                    <label><i class="fas fa-comment"></i> Special Requests</label>
+                    <textarea rows="2" id="specialRequests" placeholder="Any special requirements..."></textarea>
+                </div>
+                <button type="button" class="submit-booking-btn" onclick="submitBooking()">
+                    <i class="fas fa-check-circle"></i> Confirm Booking
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DETAIL PAGES -->
+    <div class="container detail-page" id="detail-jeep">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">Enjoy</span>
+        <h2 class="detail-title">Jeep Safari</h2>
+        <div class="detail-rating"><span class="stars">★★★★☆</span><span class="reviews">4.5 (124 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video></div>
+        <div class="detail-price" id="jeepPrice">₹1,800</div>
+        <div class="detail-description"><p><strong>Experience the thrill of Chitwan National Park</strong> in an open 4x4 jeep. Spot one-horned rhinoceros, deer, monkeys, and if you're lucky — the Royal Bengal Tiger.</p><p>✅ Morning & afternoon departures<br>✅ Includes national park entry fees<br>✅ Refreshments provided</p></div>
+        <button class="booking-button book-detail-btn" data-name="Jeep Safari" data-price="1800"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <div class="container detail-page" id="detail-canoe">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">POPULAR</span>
+        <h2 class="detail-title">Canoe Ride</h2>
+        <div class="detail-rating"><span class="stars">★★★★★</span><span class="reviews">4.9 (87 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1505229061016-24751d664d98?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1591261730793-ee6b3a0a0a7a?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4"></video></div>
+        <div class="detail-price" id="canoePrice">₹1,200</div>
+        <div class="detail-description"><p>Glide silently on the Rapti River, spotting gharial crocodiles, turtles, and kingfishers.</p></div>
+        <button class="booking-button book-detail-btn" data-name="Canoe Ride" data-price="1200"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <div class="container detail-page" id="detail-bird">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">BESTSELLER</span>
+        <h2 class="detail-title">Bird Watching</h2>
+        <div class="detail-rating"><span class="stars">★★★★☆</span><span class="reviews">4.6 (203 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1550353191-bc9e7b314a7b?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4"></video></div>
+        <div class="detail-price" id="birdPrice">₹1,200</div>
+        <div class="detail-description"><p>Join expert ornithologists to spot over 500 species including Bengal florican, paradise flycatcher, and woodpeckers.</p></div>
+        <button class="booking-button book-detail-btn" data-name="Bird Watching" data-price="1200"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <div class="container detail-page" id="detail-tharu">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">CULTURAL</span>
+        <h2 class="detail-title">Tharu Cultural Night</h2>
+        <div class="detail-rating"><span class="stars">★★★★★</span><span class="reviews">4.8 (312 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1591261730793-ee6b3a0a0a7a?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/movie.mp4"></video></div>
+        <div class="detail-price" id="tharuPrice">₹600</div>
+        <div class="detail-description"><p>Traditional stick dance, folk songs, and authentic Tharu dinner under the stars.</p></div>
+        <button class="booking-button book-detail-btn" data-name="Tharu Cultural Night" data-price="600"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <div class="container detail-page" id="detail-villa">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">LUXURY</span>
+        <h2 class="detail-title">Villa Lodge</h2>
+        <div class="detail-rating"><span class="stars">★★★★★</span><span class="reviews">4.9 (156 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4"></video></div>
+        <div class="detail-price" id="villaPrice">₹4,500</div>
+        <div class="detail-description"><p>Luxurious villa with private sit-out, organic breakfast, and direct access to nature trails.</p></div>
+        <button class="booking-button book-detail-btn" data-name="Villa Lodge" data-price="4500"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <!-- FOOTER WITH MAP -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>WILD ROOTS Jungle Safari</h4>
+                    <p>Bachhauli, Sauraha, Chitwan, Nepal</p>
+                    <p><i class="fas fa-phone"></i> +977 9841234567</p>
+                    <p><i class="fas fa-envelope"></i> info@wildrootsjunglesafari.com</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <p><a href="#" id="footerHomeLink">Home</a></p>
+                    <p><a href="#" id="footerGalleryLink">Gallery</a></p>
+                    <p><a href="#about">About Us</a></p>
+                    <p><a href="#reviews">Reviews</a></p>
+                    <p><a href="#contact">Contact</a></p>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.847521639722!2d84.2356505!3d27.5707039!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399459dfa02d0a0f%3A0x15f3f3e67cbc54e2!2sWild%20Roots%20Jungle%20Safari%20Lodge!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp" 
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="copyright">
+                <p>© 2026 WILD ROOTS Jungle Safari. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAipk6iSzjkQoQOVEVFUydxPAqXjOaRfhY",
+            authDomain: "everest-public-school.firebaseapp.com",
+            databaseURL: "https://everest-public-school-default-rtdb.firebaseio.com",
+            projectId: "everest-public-school",
+            storageBucket: "everest-public-school.firebasestorage.app",
+            messagingSenderId: "598969496568",
+            appId: "1:598969496568:web:61e2647eff4104697e9c0d"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Reviews Data for auto-scroll section
+        const reviewsData = [
+            { name: "Sarah Mitchell", initial: "S", rating: 5, text: "Amazing experience! Saw rhinos and elephants. The guides were incredibly knowledgeable. Highly recommend the jeep safari at sunrise!", date: "2 weeks ago", safari: "Jeep Safari" },
+            { name: "Michael Chen", initial: "M", rating: 5, text: "Best bird watching tour I've ever done. Spotted over 40 species including the rare Bengal Florican. Krishna is an expert guide!", date: "3 weeks ago", safari: "Bird Watching" },
+            { name: "Emma Watson", initial: "E", rating: 5, text: "The Tharu cultural night was magical! Traditional dance and authentic local food. The homestay was comfortable and welcoming.", date: "1 month ago", safari: "Tharu Night" },
+            { name: "David Wilson", initial: "D", rating: 4, text: "Great value for money. The canoe ride at sunrise was peaceful with beautiful views. Would definitely come back!", date: "1 month ago", safari: "Canoe Ride" },
+            { name: "Priya Sharma", initial: "P", rating: 5, text: "Perfect family trip! Kids loved the jeep safari and the elephant experience. The staff was very friendly and helpful.", date: "2 months ago", safari: "Family Safari" },
+            { name: "James Anderson", initial: "J", rating: 5, text: "Incredible wildlife sightings! Saw a tiger in the wild - unforgettable moment. Guides are passionate and knowledgeable.", date: "2 months ago", safari: "Jeep Safari" },
+            { name: "Lisa Martinez", initial: "L", rating: 5, text: "The villa lodge was beautiful with amazing garden views. Organic breakfast was delicious. Will definitely return!", date: "3 months ago", safari: "Villa Lodge" },
+            { name: "Rahul Mehta", initial: "R", rating: 5, text: "Authentic Tharu experience! The cooking demo was fun and the food was amazing. Great hospitality.", date: "3 months ago", safari: "Tharu Culture" },
+            { name: "Anna Kowalski", initial: "A", rating: 5, text: "Best decision to book here! The guides are true experts. Saw rhinos, crocodiles, and many birds. Unforgettable!", date: "4 months ago", safari: "Full Day Safari" },
+            { name: "Carlos Rodriguez", initial: "C", rating: 4, text: "Great experience overall. The lodge is comfortable and the safari was well organized. Good value for money.", date: "4 months ago", safari: "Jeep Safari" }
+        ];
+
+        const allReviews = [...reviewsData, ...reviewsData];
+
+        function displayReviews() {
+            const container = document.getElementById('reviewsScroll');
+            if (!container) return;
+            let html = '';
+            allReviews.forEach(review => {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) stars += i <= review.rating ? '★' : '☆';
+                html += `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">${review.initial}</div>
+                            <div class="reviewer-info">
+                                <h4>${review.name}</h4>
+                                <div class="review-stars">${stars}</div>
+                            </div>
+                        </div>
+                        <div class="review-text">"${review.text}"</div>
+                        <div class="review-meta">
+                            <span class="review-date"><i class="far fa-calendar-alt" style="font-size: 0.6rem;"></i> ${review.date}</span>
+                            <span class="google-badge"><i class="fab fa-google"></i> ${review.safari}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            // Set animation duration based on number of reviews
+            const scrollContainer = document.querySelector('.reviews-scroll');
+            if (scrollContainer) {
+                scrollContainer.style.animationDuration = `${allReviews.length * 0.8}s`;
+            }
+        }
+
+        // Go to Top Button Functionality
+        const goTopBtn = document.getElementById('goTopBtn');
+        window.addEventListener('scroll', () => {
+            if (goTopBtn) {
+                goTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+            }
+        });
+        if (goTopBtn) {
+            goTopBtn.addEventListener('click', (e) => { 
+                e.preventDefault(); 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            });
+        }
+
+        let currentPrices = { villa: 4500, jeep: 1800, canoe: 1200, bird: 1200, tharu: 600 };
+        let sliderSlides = [
+            { img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1600&q=80", title: "Experience The Wild", desc: "in Elegant Comfort", subdesc: "Chitwan National Park • Tharu Culture • Jungle Safari" },
+            { img: "https://images.unsplash.com/photo-1505229061016-24751d664d98?w=1600&q=80", title: "Jungle Safari", desc: "by Canoe & Jeep", subdesc: "Spot rhinos, crocodiles & exotic birds" },
+            { img: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=1600&q=80", title: "Bird Watching", desc: "500+ species", subdesc: "Guided tours with expert ornithologists" },
+            { img: "https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=1600&q=80", title: "Tharu Culture", desc: "Authentic Village Life", subdesc: "Traditional dance • Local cuisine • Homestay" }
+        ];
+
+        let currentBookingType = "single";
+        let currentSingleActivity = { name: "", price: 0 };
+        let currentComboActivities = [];
+        let adultCount = 1;
+        let leaderImageData = null;
+        let slideInterval;
+
+        // Load slider from Firebase
+        function loadSlider() {
+            database.ref('admin/slider').once('value', snap => {
+                if(snap.exists() && Array.isArray(snap.val())) {
+                    sliderSlides = snap.val();
+                }
+                renderSlider();
+                startAutoSlide();
+            }).catch(err => console.error("Error loading slider:", err));
+        }
+
+        function renderSlider() {
+            const wrapper = document.getElementById('slidesWrapper');
+            const dotsContainer = document.getElementById('sliderDots');
+            if(!wrapper) return;
+            
+            wrapper.innerHTML = sliderSlides.map(slide => `
+                <div class="slide" style="background-image: url('${slide.img}')">
+                    <div class="slide-content">
+                        <h2>${slide.title} <span>${slide.desc}</span></h2>
+                        <p><i class="fas fa-leaf"></i> ${slide.subdesc || 'Chitwan National Park'}</p>
+                    </div>
+                </div>
+            `).join('');
+            
+            dotsContainer.innerHTML = sliderSlides.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`).join('');
+        }
+
+        let currentSlide = 0;
+        
+        function goToSlide(index) {
+            currentSlide = index;
+            const wrapper = document.getElementById('slidesWrapper');
+            if(wrapper) {
+                wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            }
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+        
+        function startAutoSlide() {
+            if(slideInterval) clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                goToSlide((currentSlide + 1) % sliderSlides.length);
+            }, 5000);
+        }
+
+        // Load prices from Firebase
+        function loadPrices() {
+            database.ref('admin/prices').once('value', snap => {
+                if(snap.exists()) {
+                    let p = snap.val();
+                    if(p.villa) currentPrices.villa = p.villa;
+                    if(p.jeep) currentPrices.jeep = p.jeep;
+                    if(p.canoe) currentPrices.canoe = p.canoe;
+                    if(p.bird) currentPrices.bird = p.bird;
+                    if(p.tharu) currentPrices.tharu = p.tharu;
+                }
+                updateAllPrices();
+            }).catch(err => console.error("Error loading prices:", err));
+        }
+
+        function updateAllPrices() {
+            // Update activity cards
+            document.querySelectorAll('.activity-card').forEach(card => {
+                const title = card.querySelector('h3')?.innerText;
+                let priceElement = card.querySelector('.price');
+                if(title === 'Jeep Safari') priceElement.innerText = `₹${currentPrices.jeep}`;
+                else if(title === 'Canoe Ride') priceElement.innerText = `₹${currentPrices.canoe}`;
+                else if(title === 'Bird Watching') priceElement.innerText = `₹${currentPrices.bird}`;
+                else if(title === 'Tharu Night') priceElement.innerText = `₹${currentPrices.tharu}`;
+                else if(title === 'Villa Lodge') priceElement.innerText = `₹${currentPrices.villa}`;
+            });
+            
+            // Update combo items
+            document.querySelectorAll('.combo-item').forEach(item => {
+                const name = item.getAttribute('data-name');
+                let priceSpan = item.querySelector('.combo-item-info p');
+                if(name === 'Jeep Safari') priceSpan.innerText = `₹${currentPrices.jeep}`;
+                else if(name === 'Canoe Ride') priceSpan.innerText = `₹${currentPrices.canoe}`;
+                else if(name === 'Bird Watching') priceSpan.innerText = `₹${currentPrices.bird}`;
+                else if(name === 'Tharu Night') priceSpan.innerText = `₹${currentPrices.tharu}`;
+                else if(name === 'Villa Lodge') priceSpan.innerText = `₹${currentPrices.villa}`;
+                item.setAttribute('data-price', currentPrices[name === 'Jeep Safari' ? 'jeep' : name === 'Canoe Ride' ? 'canoe' : name === 'Bird Watching' ? 'bird' : name === 'Tharu Night' ? 'tharu' : 'villa']);
+            });
+            
+            // Update detail pages
+            const jeepPrice = document.getElementById('jeepPrice');
+            const canoePrice = document.getElementById('canoePrice');
+            const birdPrice = document.getElementById('birdPrice');
+            const tharuPrice = document.getElementById('tharuPrice');
+            const villaPrice = document.getElementById('villaPrice');
+            
+            if(jeepPrice) jeepPrice.innerText = `₹${currentPrices.jeep}`;
+            if(canoePrice) canoePrice.innerText = `₹${currentPrices.canoe}`;
+            if(birdPrice) birdPrice.innerText = `₹${currentPrices.bird}`;
+            if(tharuPrice) tharuPrice.innerText = `₹${currentPrices.tharu}`;
+            if(villaPrice) villaPrice.innerText = `₹${currentPrices.villa}`;
+            
+            renderComboList();
+        }
+
+        // Load activities grid
+        function renderActivities() {
+            const activities = [
+                { name: 'Jeep Safari', priceKey: 'jeep', img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=350&fit=crop', id: 'jeep', showPrice: false },
+                { name: 'Canoe Ride', priceKey: 'canoe', img: 'https://images.unsplash.com/photo-1505229061016-24751d664d98?w=500&h=350&fit=crop', id: 'canoe', showPrice: false },
+                { name: 'Bird Watching', priceKey: 'bird', img: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=500&h=350&fit=crop', id: 'bird', showPrice: false },
+                { name: 'Tharu Night', priceKey: 'tharu', img: 'https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=500&h=350&fit=crop', id: 'tharu', showPrice: false },
+                { name: 'Villa Lodge', priceKey: 'villa', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=350&fit=crop', id: 'villa', showPrice: true }
+            ];
+            const grid = document.getElementById('activitiesGrid');
+            if(grid) {
+                grid.innerHTML = activities.map(act => `
+                    <div class="activity-card" onclick="showDetail('${act.id}')">
+                        <div class="card-image"><img src="${act.img}" alt="${act.name}" class="lightbox-trigger"></div>
+                        <div class="card-content">
+                            <h3>${act.name}</h3>
+                            ${act.showPrice ? `<div class="price">₹${currentPrices[act.priceKey]}</div>` : '<div class="price" style="opacity:0; visibility:hidden; height: 24px;">&nbsp;</div>'}
+                            <div class="btn-group">
+                                <button class="btn-book" onclick="event.stopPropagation(); showDetail('${act.id}')">Enjoy</button>
+                                <button class="btn-detail" onclick="event.stopPropagation(); showDetail('${act.id}')">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Render combo list
+        function renderComboList() {
+            const combos = [
+                { name: 'Jeep Safari', priceKey: 'jeep' },
+                { name: 'Canoe Ride', priceKey: 'canoe' },
+                { name: 'Bird Watching', priceKey: 'bird' },
+                { name: 'Tharu Night', priceKey: 'tharu' },
+                { name: 'Villa Lodge', priceKey: 'villa' }
+            ];
+            const container = document.getElementById('comboActivitiesList');
+            if(container) {
+                container.innerHTML = combos.map(combo => `
+                    <div class="combo-item" data-name="${combo.name}" data-price="${currentPrices[combo.priceKey]}" onclick="toggleCombo(this)">
+                        <input type="checkbox" class="combo-checkbox" value="${combo.name.toLowerCase().replace(' ', '')}" onclick="event.stopPropagation()">
+                        <div class="combo-item-info">
+                            <h4>${combo.name}</h4>
+                            <p>₹${currentPrices[combo.priceKey]}</p>
+                        </div>
+                    </div>
+                `).join('');
+                document.querySelectorAll('.combo-checkbox').forEach(cb => cb.addEventListener('change', updateComboTotal));
+            }
+        }
+
+        function toggleCombo(item) {
+            const checkbox = item.querySelector('.combo-checkbox');
+            checkbox.checked = !checkbox.checked;
+            updateComboTotal();
+        }
+
+        function updateComboTotal() {
+            let total = 0;
+            currentComboActivities = [];
+            document.querySelectorAll('.combo-checkbox:checked').forEach(cb => {
+                const item = cb.closest('.combo-item');
+                const price = parseInt(item.dataset.price);
+                total += price;
+                currentComboActivities.push({ name: item.dataset.name, price: price });
+                item.classList.add('selected');
+            });
+            document.querySelectorAll('.combo-checkbox:not(:checked)').forEach(cb => {
+                cb.closest('.combo-item').classList.remove('selected');
+            });
+            const totalSpan = document.getElementById('comboTotalPrice');
+            if(totalSpan) totalSpan.innerText = `₹${total.toLocaleString()}`;
+        }
+
+        function updateMembers(change) {
+            adultCount += change;
+            if (adultCount < 1) adultCount = 1;
+            if (adultCount > 20) adultCount = 20;
+            const memberCountSpan = document.getElementById('memberCount');
+            const adultCountSpan = document.getElementById('adultCount');
+            if(memberCountSpan) memberCountSpan.innerText = adultCount;
+            if(adultCountSpan) adultCountSpan.innerText = adultCount;
+            updateTotalPrice();
+        }
+
+        function updateTotalPrice() {
+            const kidsAbove3 = parseInt(document.getElementById('kidsAbove3')?.value) || 0;
+            let basePrice = 0;
+            if (currentBookingType === "single") {
+                basePrice = currentSingleActivity.price;
+                const adultTotal = adultCount * basePrice;
+                const kidsTotal = kidsAbove3 * (basePrice / 2);
+                const finalTotal = adultTotal + kidsTotal;
+                const basePriceDisplay = document.getElementById('basePriceDisplay');
+                const adultTotalDisplay = document.getElementById('adultTotalDisplay');
+                const kidsTotalDisplay = document.getElementById('kidsTotalDisplay');
+                const finalTotalDisplay = document.getElementById('finalTotalDisplay');
+                if(basePriceDisplay) basePriceDisplay.innerHTML = `₹${basePrice.toLocaleString()} per adult`;
+                if(adultTotalDisplay) adultTotalDisplay.innerHTML = `₹${adultTotal.toLocaleString()}`;
+                if(kidsTotalDisplay) kidsTotalDisplay.innerHTML = `₹${Math.floor(kidsTotal).toLocaleString()}`;
+                if(finalTotalDisplay) finalTotalDisplay.innerHTML = `Total: ₹${Math.floor(finalTotal).toLocaleString()}`;
+            } else {
+                let comboTotal = currentComboActivities.reduce((sum, act) => sum + act.price, 0);
+                basePrice = comboTotal;
+                const adultTotal = adultCount * basePrice;
+                const kidsTotal = kidsAbove3 * (basePrice / 2);
+                const finalTotal = adultTotal + kidsTotal;
+                const basePriceDisplay = document.getElementById('basePriceDisplay');
+                const adultTotalDisplay = document.getElementById('adultTotalDisplay');
+                const kidsTotalDisplay = document.getElementById('kidsTotalDisplay');
+                const finalTotalDisplay = document.getElementById('finalTotalDisplay');
+                if(basePriceDisplay) basePriceDisplay.innerHTML = `₹${basePrice.toLocaleString()} (combo)`;
+                if(adultTotalDisplay) adultTotalDisplay.innerHTML = `₹${adultTotal.toLocaleString()}`;
+                if(kidsTotalDisplay) kidsTotalDisplay.innerHTML = `₹${Math.floor(kidsTotal).toLocaleString()}`;
+                if(finalTotalDisplay) finalTotalDisplay.innerHTML = `Total: ₹${Math.floor(finalTotal).toLocaleString()}`;
+            }
+        }
+
+        // Package type switching
+        function showPackageType(type) {
+            // Hide all package contents
+            const customCombo = document.getElementById('custom-combo');
+            const package2d = document.getElementById('package-2d');
+            const package3d = document.getElementById('package-3d');
+            
+            if(customCombo) customCombo.style.display = 'none';
+            if(package2d) package2d.style.display = 'none';
+            if(package3d) package3d.style.display = 'none';
+            
+            // Show selected package
+            if(type === 'custom') {
+                if(customCombo) customCombo.style.display = 'block';
+            } else if(type === 'package2d') {
+                if(package2d) package2d.style.display = 'block';
+            } else if(type === 'package3d') {
+                if(package3d) package3d.style.display = 'block';
+            }
+            
+            // Update active tab
+            document.querySelectorAll('.package-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Book package function
+        function bookPackage(packageName, packagePrice) {
+            currentBookingType = "single";
+            currentSingleActivity = { name: packageName, price: packagePrice };
+            const bookingTitle = document.getElementById('bookingTitle');
+            const bookingPrice = document.getElementById('bookingPrice');
+            if(bookingTitle) bookingTitle.innerText = `Book ${packageName}`;
+            if(bookingPrice) bookingPrice.innerHTML = `₹${packagePrice.toLocaleString()} per person`;
+            const selectedListDiv = document.getElementById('selectedActivitiesList');
+            if(selectedListDiv) selectedListDiv.style.display = 'none';
+            const bookingLightbox = document.getElementById('bookingLightbox');
+            if(bookingLightbox) bookingLightbox.classList.add('active');
+            updateTotalPrice();
+        }
+
+        function openComboBooking() {
+            const selected = document.querySelectorAll('.combo-checkbox:checked');
+            if (selected.length === 0) {
+                alert('Please select at least one activity for combo booking!');
+                return;
+            }
+            currentComboActivities = [];
+            selected.forEach(cb => {
+                const item = cb.closest('.combo-item');
+                currentComboActivities.push({ name: item.dataset.name, price: parseInt(item.dataset.price) });
+            });
+            currentBookingType = "combo";
+            const bookingTitle = document.getElementById('bookingTitle');
+            const bookingPrice = document.getElementById('bookingPrice');
+            if(bookingTitle) bookingTitle.innerText = `Book Combo Package`;
+            if(bookingPrice) bookingPrice.innerHTML = `Total Base: ₹${currentComboActivities.reduce((s,a)=>s+a.price,0).toLocaleString()}`;
+            const selectedListDiv = document.getElementById('selectedActivitiesList');
+            const selectedListUl = document.getElementById('selectedActivitiesUl');
+            if(selectedListUl) {
+                selectedListUl.innerHTML = '';
+                currentComboActivities.forEach(act => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${act.name}</span><span>₹${act.price.toLocaleString()}</span>`;
+                    selectedListUl.appendChild(li);
+                });
+            }
+            if(selectedListDiv) selectedListDiv.style.display = 'block';
+            const bookingLightbox = document.getElementById('bookingLightbox');
+            if(bookingLightbox) bookingLightbox.classList.add('active');
+            updateTotalPrice();
+        }
+
+        function openBookingModal(activityName, activityPrice) {
+            currentBookingType = "single";
+            currentSingleActivity = { name: activityName, price: parseInt(activityPrice) };
+            const bookingTitle = document.getElementById('bookingTitle');
+            const bookingPrice = document.getElementById('bookingPrice');
+            if(bookingTitle) bookingTitle.innerText = `Book ${activityName}`;
+            if(bookingPrice) bookingPrice.innerHTML = `₹${parseInt(activityPrice).toLocaleString()} per adult`;
+            const selectedListDiv = document.getElementById('selectedActivitiesList');
+            if(selectedListDiv) selectedListDiv.style.display = 'none';
+            const bookingLightbox = document.getElementById('bookingLightbox');
+            if(bookingLightbox) bookingLightbox.classList.add('active');
+            updateTotalPrice();
+        }
+
+        function closeBookingModal() {
+            const bookingLightbox = document.getElementById('bookingLightbox');
+            if(bookingLightbox) bookingLightbox.classList.remove('active');
+            const bookingForm = document.getElementById('bookingForm');
+            if(bookingForm) bookingForm.reset();
+            const leaderPreview = document.getElementById('leaderImagePreview');
+            if(leaderPreview) leaderPreview.innerHTML = `<div class="leader-image-placeholder"><i class="fas fa-camera"></i></div>`;
+            leaderImageData = null;
+            adultCount = 1;
+            const memberCountSpan = document.getElementById('memberCount');
+            const adultCountSpan = document.getElementById('adultCount');
+            if(memberCountSpan) memberCountSpan.innerText = '1';
+            if(adultCountSpan) adultCountSpan.innerText = '1';
+            const kidsBelow3 = document.getElementById('kidsBelow3');
+            const kidsAbove3 = document.getElementById('kidsAbove3');
+            if(kidsBelow3) kidsBelow3.value = '0';
+            if(kidsAbove3) kidsAbove3.value = '0';
+            updateTotalPrice();
+        }
+
+        const leaderImageInput = document.getElementById('leaderImageInput');
+        if(leaderImageInput) {
+            leaderImageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        leaderImageData = event.target.result;
+                        const leaderPreview = document.getElementById('leaderImagePreview');
+                        if(leaderPreview) leaderPreview.innerHTML = `<img src="${leaderImageData}" class="leader-image-preview">`;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+        async function submitBooking() {
+            const name = document.getElementById('guestName')?.value;
+            const countryCode = document.getElementById('countryCode')?.value;
+            const whatsapp = document.getElementById('whatsappNumber')?.value;
+            const mobile = document.getElementById('mobileNumber')?.value;
+            const adults = adultCount;
+            const kidsBelow3 = parseInt(document.getElementById('kidsBelow3')?.value) || 0;
+            const kidsAbove3 = parseInt(document.getElementById('kidsAbove3')?.value) || 0;
+            const date = document.getElementById('preferredDate')?.value;
+            const requests = document.getElementById('specialRequests')?.value;
+
+            if (!name || !whatsapp || !mobile) { alert('Please fill all required fields'); return; }
+
+            let baseTotal = 0, activityName = '';
+            if (currentBookingType === "combo") {
+                baseTotal = currentComboActivities.reduce((s,a)=>s+a.price,0);
+                activityName = currentComboActivities.map(a=>a.name).join(' + ');
+            } else {
+                baseTotal = currentSingleActivity.price;
+                activityName = currentSingleActivity.name;
+            }
+            
+            const adultTotal = adults * baseTotal;
+            const kidsTotal = kidsAbove3 * (baseTotal / 2);
+            const finalTotal = adultTotal + kidsTotal;
+
+            const bookingData = {
+                bookingId: "BOOK_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6),
+                bookingType: currentBookingType,
+                activityName: activityName,
+                guestName: name,
+                whatsappFull: countryCode + whatsapp,
+                mobile: mobile,
+                adults: adults,
+                kidsBelow3: kidsBelow3,
+                kidsAbove3: kidsAbove3,
+                basePrice: baseTotal,
+                adultTotal: adultTotal,
+                kidsTotal: Math.floor(kidsTotal),
+                finalTotal: Math.floor(finalTotal),
+                preferredDate: date || 'Not specified',
+                specialRequests: requests || 'None',
+                leaderPhoto: leaderImageData || null,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                await database.ref('bookings/' + bookingData.bookingId).set(bookingData);
+                alert(`✅ Booking Confirmed!\n\nBooking ID: ${bookingData.bookingId}\nActivity: ${activityName}\nTotal: ₹${Math.floor(finalTotal)}\n\nWe will contact you on WhatsApp shortly.`);
+                closeBookingModal();
+            } catch(error) {
+                alert('Error saving booking: ' + error.message);
+            }
+        }
+
+        function initGallery() {
+            const previewGrid = document.getElementById('previewGrid');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const galleryItems = [
+                { src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', category: 'wildlife', title: 'Jeep Safari' },
+                { src: 'https://images.unsplash.com/photo-1505229061016-24751d664d98?w=400&h=300&fit=crop', category: 'wildlife', title: 'Canoe Ride' },
+                { src: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop', category: 'wildlife', title: 'Bird Watching' },
+                { src: 'https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=400&h=300&fit=crop', category: 'culture', title: 'Tharu Dance' },
+                { src: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop', category: 'accommodation', title: 'Villa Lodge' }
+            ];
+            if(previewGrid) previewGrid.innerHTML = galleryItems.map(item => `<img src="${item.src}" class="lightbox-trigger">`).join('');
+            
+            const fullGalleryItems = [...galleryItems, 
+                { src: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400&h=400&fit=crop', category: 'culture', title: 'Village Life' },
+                { src: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop', category: 'accommodation', title: 'Deluxe Room' }
+            ];
+            if(galleryGrid) galleryGrid.innerHTML = fullGalleryItems.map(item => `
+                <div class="gallery-item" data-category="${item.category}">
+                    <img src="${item.src}" class="lightbox-trigger">
+                    <div class="gallery-overlay">${item.title}</div>
+                </div>
+            `).join('');
+        }
+
+        function showMainPage() {
+            const mainSections = document.getElementById('mainPageSections');
+            const fullGallery = document.getElementById('fullGalleryPage');
+            const detailPages = document.querySelectorAll('.detail-page');
+            if(mainSections) mainSections.style.display = 'block';
+            if(fullGallery) fullGallery.style.display = 'none';
+            detailPages.forEach(p => p.style.display = 'none');
+            const menuToggle = document.getElementById('menu-toggle');
+            if(menuToggle) menuToggle.checked = false;
+            window.scrollTo(0, 0);
+        }
+
+        function showGalleryPage() {
+            const mainSections = document.getElementById('mainPageSections');
+            const fullGallery = document.getElementById('fullGalleryPage');
+            const detailPages = document.querySelectorAll('.detail-page');
+            if(mainSections) mainSections.style.display = 'none';
+            if(fullGallery) fullGallery.style.display = 'block';
+            detailPages.forEach(p => p.style.display = 'none');
+            window.scrollTo(0, 0);
+        }
+
+        function showDetail(activityId) {
+            const mainSections = document.getElementById('mainPageSections');
+            const fullGallery = document.getElementById('fullGalleryPage');
+            const detailPages = document.querySelectorAll('.detail-page');
+            if(mainSections) mainSections.style.display = 'none';
+            if(fullGallery) fullGallery.style.display = 'none';
+            detailPages.forEach(p => p.style.display = 'none');
+            const target = document.getElementById(`detail-${activityId}`);
+            if(target) target.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function filterGallery(category, btn) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.display = (category === 'all' || item.dataset.category === category) ? 'block' : 'none';
+            });
+        }
+
+        function openInstagram(e) { e.preventDefault(); alert('Opening Instagram: @wildrootsjunglesafari'); }
+
+        // Event Listeners
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const menuToggle = document.getElementById('menu-toggle');
+                if(menuToggle) menuToggle.checked = false;
+                const target = this.getAttribute('data-target');
+                if(target === 'gallery') showGalleryPage();
+                else if(target === 'home') showMainPage();
+                else if(target === 'reviews') {
+                    showMainPage();
+                    const reviewsSection = document.getElementById('reviews');
+                    if(reviewsSection) setTimeout(() => reviewsSection.scrollIntoView({ behavior: 'smooth' }), 100);
+                } else {
+                    showMainPage();
+                    const sectionId = this.getAttribute('href');
+                    if(sectionId && sectionId !== '#') {
+                        const section = document.querySelector(sectionId);
+                        if(section) setTimeout(() => section.scrollIntoView({ behavior: 'smooth' }), 100);
+                    }
+                }
+            });
+        });
+
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        if(viewMoreBtn) viewMoreBtn.addEventListener('click', () => showGalleryPage());
+        const footerGalleryLink = document.getElementById('footerGalleryLink');
+        if(footerGalleryLink) footerGalleryLink.addEventListener('click', (e) => { e.preventDefault(); showGalleryPage(); });
+        const footerHomeLink = document.getElementById('footerHomeLink');
+        if(footerHomeLink) footerHomeLink.addEventListener('click', (e) => { e.preventDefault(); showMainPage(); });
+        const closeGalleryBtn = document.getElementById('closeGalleryBtn');
+        if(closeGalleryBtn) closeGalleryBtn.addEventListener('click', () => showMainPage());
+        
+        document.querySelectorAll('.close-detail-btn').forEach(btn => btn.addEventListener('click', () => showMainPage()));
+        document.querySelectorAll('.detail-btn').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); showDetail(btn.dataset.activity); }));
+        document.querySelectorAll('.book-detail-btn').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); openBookingModal(btn.dataset.name, btn.dataset.price); }));
+        
+        const bookingCloseBtn = document.getElementById('bookingCloseBtn');
+        if(bookingCloseBtn) bookingCloseBtn.addEventListener('click', closeBookingModal);
+        const bookingLightbox = document.getElementById('bookingLightbox');
+        if(bookingLightbox) bookingLightbox.addEventListener('click', (e) => { if(e.target === bookingLightbox) closeBookingModal(); });
+
+        // Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        document.addEventListener('click', (e) => {
+            if(e.target.classList.contains('lightbox-trigger')) {
+                if(lightboxImg) lightboxImg.src = e.target.src;
+                if(lightbox) lightbox.classList.add('active');
+            }
+        });
+        if(lightboxClose) lightboxClose.addEventListener('click', () => lightbox?.classList.remove('active'));
+        if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
+
+        // Initialize all
+        loadPrices();
+        loadSlider();
+        renderActivities();
+        renderComboList();
+        initGallery();
+        displayReviews();
+        showMainPage();
+        
+        // Make functions global
+        window.showMainPage = showMainPage;
+        window.showDetail = showDetail;
+        window.openBookingModal = openBookingModal;
+        window.openComboBooking = openComboBooking;
+        window.closeBookingModal = closeBookingModal;
+        window.updateMembers = updateMembers;
+        window.updateTotalPrice = updateTotalPrice;
+        window.submitBooking = submitBooking;
+        window.goToSlide = goToSlide;
+        window.toggleCombo = toggleCombo;
+        window.updateComboTotal = updateComboTotal;
+        window.filterGallery = filterGallery;
+        window.openInstagram = openInstagram;
+        window.showPackageType = showPackageType;
+        window.bookPackage = bookPackage;
+    </script>
+</body>
+</html>
