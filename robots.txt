@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://wild-roots-jungle-safari.vercel.app/sitemap.xml
