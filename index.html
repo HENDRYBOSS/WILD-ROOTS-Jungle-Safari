@@ -3,12 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>WILD ROOTS JUNGLE SAFARI LODGE | Complete Website</title>
+    
+    <!-- ========== SEO META TAGS ========== -->
+    <title>Wild Roots Jungle Safari | Best Safari Lodge in Chitwan National Park, Nepal</title>
+    <meta name="description" content="Experience authentic Tharu culture and wildlife safaris at Wild Roots Jungle Safari Lodge. Book jeep safaris, canoe rides, bird watching, and luxury villa stays in Chitwan National Park, Nepal. Best jungle safari experience with expert guides.">
+    <meta name="keywords" content="Chitwan National Park, jungle safari Nepal, Tharu culture, wildlife safari, jeep safari Nepal, bird watching Chitwan, jungle lodge Nepal, safari resort Nepal, wild roots, elephant safari, rhino sighting, Nepal travel, Chitwan safari">
+    <meta name="author" content="Wild Roots Jungle Safari">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="English">
+    <link rel="canonical" href="https://wild-roots-jungle-safari.vercel.app/">
+    
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="-hQbKVjXUT-pip5enAvqbbBz9K5S4Ufb0QS-TIztvz8" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wild-roots-jungle-safari.vercel.app/">
+    <meta property="og:title" content="Wild Roots Jungle Safari | Best Safari Lodge in Chitwan National Park">
+    <meta property="og:description" content="Experience authentic Tharu culture and wildlife safaris. Book your jungle adventure today! Jeep safari, canoe ride, bird watching & luxury stays.">
+    <meta property="og:image" content="https://wild-roots-jungle-safari.vercel.app/images/og-image.jpg">
+    <meta property="og:site_name" content="Wild Roots Jungle Safari">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Wild Roots Jungle Safari | Best Safari Lodge in Chitwan">
+    <meta name="twitter:description" content="Experience authentic Tharu culture and wildlife safaris. Book your jungle adventure today!">
+    <meta name="twitter:image" content="https://wild-roots-jungle-safari.vercel.app/images/og-image.jpg">
+    
+    <!-- Geo Location for Local SEO -->
+    <meta name="geo.region" content="NP">
+    <meta name="geo.placename" content="Chitwan, Sauraha">
+    <meta name="geo.position" content="27.5707;84.2357">
+    <meta name="ICBM" content="27.5707, 84.2357">
+    
+    <!-- ========== SCHEMA MARKUP (Structured Data) ========== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TouristDestination",
+      "name": "Wild Roots Jungle Safari",
+      "description": "Family-run retreat in Bachhauli village, gateway to Chitwan National Park offering authentic Tharu hospitality and jungle safaris. Over 15 years of experience in responsible tourism.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bachhauli",
+        "addressLocality": "Sauraha",
+        "addressRegion": "Chitwan",
+        "postalCode": "44200",
+        "addressCountry": "NP"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.5707039",
+        "longitude": "84.2356505"
+      },
+      "telephone": "+9779841234567",
+      "email": "info@wildrootsjunglesafari.com",
+      "url": "https://wild-roots-jungle-safari.vercel.app/",
+      "priceRange": "₹600 - ₹18,500",
+      "openingHours": "Mo-Su 06:00-22:00",
+      "sameAs": [
+        "https://www.instagram.com/wildrootsjunglesafari",
+        "https://www.facebook.com/wildrootsjunglesafari"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "1247",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Wild Roots Jungle Safari Lodge",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bachhauli",
+        "addressLocality": "Sauraha",
+        "addressRegion": "Chitwan",
+        "addressCountry": "NP"
+      },
+      "telephone": "+9779841234567",
+      "priceRange": "₹₹"
+    }
+    </script>
+    
+    <!-- ========== FONTS & STYLES ========== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<meta name="google-site-verification" content="-hQbKVjXUT-pip5enAvqbbBz9K5S4Ufb0QS-TIztvz8" />
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
     <style>
         * {
             margin: 0;
@@ -146,193 +237,7 @@
             right: 85px;
         }
 
-        /* REVIEWS SECTION STYLES */
-        .reviews-compact {
-            background: linear-gradient(135deg, #ffffff, #faf7f0);
-            border-radius: 30px;
-            padding: 2rem 1.5rem;
-            margin: 3rem 0;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(201,162,75,0.2);
-        }
-
-        .reviews-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .reviews-header h3 {
-            font-size: 1.6rem;
-            color: #0a2f1f;
-            font-family: 'Playfair Display', serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .reviews-header h3 i {
-            color: #c9a24b;
-            font-size: 1.3rem;
-        }
-
-        .rating-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #f0f0f0;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            margin-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .rating-badge .stars {
-            color: #f5b342;
-            letter-spacing: 2px;
-        }
-
-        .reviews-scroll-container {
-            position: relative;
-            height: 380px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .reviews-scroll {
-            display: flex;
-            flex-direction: column;
-            animation: scrollReviews 30s linear infinite;
-        }
-
-        .reviews-scroll:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes scrollReviews {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-50%);
-            }
-        }
-
-        .review-item {
-            background: white;
-            border-radius: 20px;
-            padding: 1rem 1.2rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s;
-        }
-
-        .review-item:hover {
-            border-color: #c9a24b;
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(201,162,75,0.15);
-        }
-
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 0.6rem;
-        }
-
-        .reviewer-avatar {
-            width: 40px;
-            height: 40px;
-            background: #0a2f1f;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #c9a24b;
-            font-weight: 600;
-            font-size: 1rem;
-            border: 2px solid #c9a24b;
-        }
-
-        .reviewer-info h4 {
-            font-size: 0.95rem;
-            color: #0a2f1f;
-            margin-bottom: 0.2rem;
-        }
-
-        .review-stars {
-            color: #f5b342;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-        }
-
-        .review-text {
-            font-size: 0.85rem;
-            color: #4a5568;
-            line-height: 1.5;
-            margin: 0.5rem 0;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .review-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
-            font-size: 0.7rem;
-            color: #718096;
-        }
-
-        .review-date {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .google-badge {
-            background: #f0f0f0;
-            padding: 0.2rem 0.5rem;
-            border-radius: 20px;
-            font-size: 0.65rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .google-badge i {
-            color: #c9a24b;
-        }
-
-        .view-all-link {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-
-        .view-all-link a {
-            color: #c9a24b;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: 0.3s;
-            padding: 8px 20px;
-            border-radius: 40px;
-            background: rgba(201,162,75,0.1);
-        }
-
-        .view-all-link a:hover {
-            gap: 10px;
-            color: #0a2f1f;
-            background: rgba(201,162,75,0.2);
-        }
-
-        /* Header Styles */
+        /* Header Styles with Circular Logo */
         header {
             background: var(--primary-dark);
             color: var(--cream-light);
@@ -351,6 +256,41 @@
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-circle {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), #dbb268);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-circle i {
+            font-size: 28px;
+            color: var(--primary-dark);
         }
 
         .logo h1 {
@@ -446,6 +386,11 @@
             width: 90%;
             max-width: 1000px;
             z-index: 2;
+            animation: fadeInScale 1s ease;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
         .slide-content h2 {
             font-size: clamp(2rem, 8vw, 5rem);
@@ -507,6 +452,7 @@
             width: 60px;
             height: 3px;
             background: var(--accent-gold);
+            transition: width 0.6s ease;
         }
         .section-title::after {
             content: '✦';
@@ -634,7 +580,7 @@
         }
         @media (min-width: 1100px) {
             .activities-grid {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(6, 1fr);
             }
         }
         .activity-card {
@@ -657,6 +603,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .activity-card:hover .card-image img {
+            transform: scale(1.05);
         }
         .card-content {
             padding: 1.2rem;
@@ -743,10 +693,10 @@
             object-fit: cover;
             border-radius: 15px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s;
         }
         .preview-grid img:hover {
-            transform: scale(1.02);
+            transform: scale(1.05);
             border: 2px solid var(--accent-gold);
         }
         .btn-viewmore {
@@ -761,6 +711,12 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-viewmore:hover {
+            transform: translateY(-2px);
+            background: var(--accent-gold);
+            color: var(--primary-dark);
         }
 
         /* Dining Section */
@@ -797,6 +753,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .dining-image:hover img {
+            transform: scale(1.05);
         }
         .dining-content h3 {
             font-size: 1.8rem;
@@ -813,6 +773,10 @@
             align-items: center;
             gap: 10px;
             border-bottom: 1px solid #e2e8f0;
+            transition: transform 0.3s;
+        }
+        .dining-features li:hover {
+            transform: translateX(5px);
         }
         .dining-features li i {
             color: var(--accent-gold);
@@ -833,6 +797,11 @@
             border-radius: 15px;
             padding: 1.2rem;
             text-align: center;
+            transition: transform 0.3s;
+        }
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         .menu-item img {
             width: 100%;
@@ -898,6 +867,10 @@
             font-size: 1.3rem;
             margin: 0 auto 0.8rem;
             border: 3px solid var(--accent-gold);
+            transition: transform 0.3s;
+        }
+        .timeline-step:hover .step-number {
+            transform: scale(1.1);
         }
         .step-title {
             font-weight: 600;
@@ -1013,6 +986,10 @@
             margin-bottom: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             border: 1px solid rgba(201,162,75,0.2);
+            transition: transform 0.3s;
+        }
+        .safari-package-card:hover {
+            transform: translateY(-5px);
         }
 
         .package-header {
@@ -1074,6 +1051,10 @@
             height: 100%;
             object-fit: cover;
             border-radius: 15px;
+            transition: transform 0.3s;
+        }
+        .package-image:hover img {
+            transform: scale(1.02);
         }
 
         .package-images {
@@ -1087,6 +1068,10 @@
             height: 150px;
             object-fit: cover;
             border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .package-images img:hover {
+            transform: scale(1.05);
         }
 
         /* Safari Highlights */
@@ -1114,6 +1099,10 @@
             align-items: center;
             gap: 12px;
             padding: 8px 0;
+            transition: transform 0.3s;
+        }
+        .highlight-item:hover {
+            transform: translateX(5px);
         }
 
         .highlight-item i {
@@ -1183,6 +1172,188 @@
             box-shadow: 0 8px 20px rgba(201,162,75,0.4);
         }
 
+        /* REVIEWS SECTION STYLES */
+        .reviews-compact {
+            background: linear-gradient(135deg, #ffffff, #faf7f0);
+            border-radius: 30px;
+            padding: 2rem 1.5rem;
+            margin: 3rem 0;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(201,162,75,0.2);
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .reviews-header h3 {
+            font-size: 1.6rem;
+            color: #0a2f1f;
+            font-family: 'Playfair Display', serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reviews-header h3 i {
+            color: #c9a24b;
+            font-size: 1.3rem;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #f0f0f0;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .rating-badge .stars {
+            color: #f5b342;
+            letter-spacing: 2px;
+        }
+
+        .reviews-scroll-container {
+            position: relative;
+            height: 380px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .reviews-scroll {
+            display: flex;
+            flex-direction: column;
+            animation: scrollReviews 30s linear infinite;
+        }
+
+        .reviews-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollReviews {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); }
+        }
+
+        .review-item {
+            background: white;
+            border-radius: 20px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .review-item:hover {
+            border-color: #c9a24b;
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(201,162,75,0.15);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 0.6rem;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            background: #0a2f1f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a24b;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid #c9a24b;
+        }
+
+        .reviewer-info h4 {
+            font-size: 0.95rem;
+            color: #0a2f1f;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-stars {
+            color: #f5b342;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .review-text {
+            font-size: 0.85rem;
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #718096;
+        }
+
+        .review-date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .google-badge {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .google-badge i {
+            color: #c9a24b;
+        }
+
+        .view-all-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .view-all-link a {
+            color: #c9a24b;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.3s;
+            padding: 8px 20px;
+            border-radius: 40px;
+            background: rgba(201,162,75,0.1);
+        }
+
+        .view-all-link a:hover {
+            gap: 10px;
+            color: #0a2f1f;
+            background: rgba(201,162,75,0.2);
+        }
+
         /* Full Gallery Page */
         .full-gallery-page {
             display: none;
@@ -1208,6 +1379,10 @@
             font-size: 1.5rem;
             cursor: pointer;
             border: 2px solid var(--accent-gold);
+            transition: 0.3s;
+        }
+        .close-gallery-btn:hover {
+            transform: rotate(90deg);
         }
         .gallery-categories {
             display: flex;
@@ -1301,6 +1476,12 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
+            transition: 0.3s;
+        }
+        .insta-link:hover {
+            transform: translateY(-2px);
+            background: var(--accent-gold);
+            color: var(--primary-dark);
         }
 
         /* Detail Pages */
@@ -1328,6 +1509,12 @@
             border-radius: 50%;
             background: #f5f5f5;
             z-index: 10;
+            transition: 0.3s;
+        }
+        .detail-close:hover {
+            transform: rotate(90deg);
+            background: var(--accent-gold);
+            color: white;
         }
         .detail-badge {
             display: inline-block;
@@ -1366,6 +1553,10 @@
             object-fit: cover;
             border-radius: 15px;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .main-image img:hover {
+            transform: scale(1.02);
         }
         .side-images {
             display: grid;
@@ -1378,6 +1569,10 @@
             object-fit: cover;
             border-radius: 12px;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .side-images img:hover {
+            transform: scale(1.05);
         }
         .detail-video video {
             width: 100%;
@@ -1574,6 +1769,10 @@
             font-size: 1.3rem;
             cursor: pointer;
             font-weight: bold;
+            transition: 0.2s;
+        }
+        .member-count button:hover {
+            transform: scale(1.1);
         }
         .member-count span {
             font-size: 1.5rem;
@@ -1651,6 +1850,7 @@
             cursor: pointer;
         }
 
+        /* Footer with Circular Logo */
         footer {
             background: var(--primary-dark);
             color: var(--cream-light);
@@ -1669,6 +1869,36 @@
                 grid-template-columns: repeat(3, 1fr);
             }
         }
+        .footer-logo-circle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        .footer-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-gold), #dbb268);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .footer-circle:hover {
+            transform: scale(1.05);
+        }
+        .footer-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .footer-circle i {
+            font-size: 32px;
+            color: var(--primary-dark);
+        }
         .footer-col h4 {
             color: var(--accent-gold);
             margin-bottom: 1rem;
@@ -1676,6 +1906,11 @@
         .footer-col a {
             color: #9bae7b;
             text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-col a:hover {
+            color: var(--accent-gold);
+            padding-left: 5px;
         }
         .social-links i {
             font-size: 1.5rem;
@@ -1686,6 +1921,7 @@
         }
         .social-links i:hover {
             color: var(--accent-gold);
+            transform: translateY(-3px);
         }
         .map-container {
             margin-top: 2rem;
@@ -1726,6 +1962,10 @@
                 padding: 8px 16px;
                 font-size: 0.85rem;
             }
+            .logo-circle {
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
 </head>
@@ -1734,9 +1974,14 @@
     
     <header>
         <div class="header-container">
-            <div class="logo">
-                <h1>WILD ROOTS <span>Jungle Safari</span></h1>
-                <p>WILD LODGE</p>
+            <div class="logo-wrapper">
+                <div class="logo-circle" id="headerLogo" onclick="window.location.href='#home'">
+                 <img src="WhatsApp Image 2026-03-23 at 7.47.15 PM.jpeg" alt="Wild Roots Jungle Safari Logo">
+                </div>
+                <div class="logo">
+                    <h1>WILD ROOTS <span>Jungle Safari</span></h1>
+                    <p>WILD LODGE</p>
+                </div>
             </div>
             <label for="menu-toggle" class="hamburger-label">
                 <span></span>
@@ -1811,14 +2056,14 @@
                 </div>
                 <div class="wellness-grid">
                     <div class="wellness-card">
-                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Sunrise yoga">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Sunrise yoga in Chitwan">
                         <div class="card-text">
                             <h3>Sunrise Yoga</h3>
                             <p>Start your day with gentle asanas as the jungle awakens. Overlooking the Rapti river, our open-air deck offers peace and fresh air.</p>
                         </div>
                     </div>
                     <div class="wellness-card">
-                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=600&h=400&fit=crop" alt="Evening meditation">
+                        <img src="https://images.unsplash.com/photo-1588286840104-8957b019727f?w=600&h=400&fit=crop" alt="Evening meditation at jungle lodge">
                         <div class="card-text">
                             <h3>Evening Meditation</h3>
                             <p>Wind down with guided meditation accompanied by the sounds of the forest – birds, cicadas, and distant calls of deer.</p>
@@ -1839,14 +2084,14 @@
                 </div>
                 <div class="wellness-grid">
                     <div class="wellness-card">
-                        <img src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&h=400&fit=crop" alt="Singing bowls">
+                        <img src="https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&h=400&fit=crop" alt="Himalayan singing bowls">
                         <div class="card-text">
                             <h3>Himalayan Singing Bowls</h3>
                             <p>Experience deep relaxation with the resonant tones of singing bowls. Sessions are held in our tranquil bamboo hut.</p>
                         </div>
                     </div>
                     <div class="wellness-card">
-                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Sound bath">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=600&h=400&fit=crop" alt="Forest sound bath">
                         <div class="card-text">
                             <h3>Forest Sound Bath</h3>
                             <p>Lie down and let the gong, chimes, and nature sounds wash over you. A unique outdoor sound bath surrounded by sal trees.</p>
@@ -1854,8 +2099,8 @@
                     </div>
                 </div>
                 <div class="dual-image-row">
-                    <img src="https://images.unsplash.com/photo-1631549916768-4119b4121f5c?w=600&h=400&fit=crop" alt="Tibetan bowls">
-                    <img src="https://images.unsplash.com/photo-1617648621109-04e53b70b6b0?w=600&h=400&fit=crop" alt="Gong healing">
+                    <img src="sound-therapy-3473.jpg" alt="Tibetan bowls">
+                    <img src="81ZQ21e2hpL._AC_UF1000,1000_QL80_.jpg" alt="Gong healing">
                 </div>
             </div>
 
@@ -1867,7 +2112,7 @@
                 </div>
                 <div class="wellness-grid">
                     <div class="wellness-card">
-                        <img src="https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=600&h=400&fit=crop" alt="Tharu village">
+                        <img src="image.png" alt="Tharu village">
                         <div class="card-text">
                             <h3>Heritage Walk</h3>
                             <p>Explore traditional mud houses with tribal art, meet local artisans, and learn about Tharu customs and everyday life.</p>
@@ -1882,12 +2127,12 @@
                     </div>
                 </div>
                 <div class="dual-image-row">
-                    <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b9695a3?w=600&h=400&fit=crop" alt="Tharu women">
+                    <img src="tharu culture/Tharu-culture.jpg" alt="Tharu women">
                     <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?w=600&h=400&fit=crop" alt="Village children">
                 </div>
             </div>
 
-            <!-- ACTIVITIES SECTION -->
+            <!-- ACTIVITIES SECTION - DYNAMIC FROM FIREBASE -->
             <h2 class="section-title" id="safari">Jungle & Culture Activities</h2>
             <div class="activities-grid" id="activitiesGrid"></div>
 
@@ -1938,7 +2183,7 @@
                     <button class="package-tab" onclick="showPackageType('package3d')">🌿 3 Days / 4 Nights Ultimate</button>
                 </div>
                 
-                <!-- CUSTOM COMBO (Original) -->
+                <!-- CUSTOM COMBO -->
                 <div id="custom-combo" class="package-content">
                     <div class="combo-activities" id="comboActivitiesList"></div>
                 </div>
@@ -1999,30 +2244,12 @@
                         <div class="safari-highlights">
                             <h4>🐾 Safari Highlights</h4>
                             <div class="highlights-grid">
-                                <div class="highlight-item">
-                                    <i class="fas fa-water"></i>
-                                    <span>Canoe ride with crocodile & bird watching</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-hiking"></i>
-                                    <span>Guided jungle trekking with expert naturalist</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-rhino"></i>
-                                    <span>Wildlife sightings: one-horned rhino, deer, sloth bear, birds</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-apple-alt"></i>
-                                    <span>Organic local food</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-home"></i>
-                                    <span>Eco-friendly lodge with traditional design</span>
-                                </div>
-                                <div class="highlight-item">
-                                    <i class="fas fa-leaf"></i>
-                                    <span>Peaceful jungle atmosphere</span>
-                                </div>
+                                <div class="highlight-item"><i class="fas fa-water"></i><span>Canoe ride with crocodile & bird watching</span></div>
+                                <div class="highlight-item"><i class="fas fa-hiking"></i><span>Guided jungle trekking with expert naturalist</span></div>
+                                <div class="highlight-item"><i class="fas fa-rhino"></i><span>Wildlife sightings: one-horned rhino, deer, sloth bear, birds</span></div>
+                                <div class="highlight-item"><i class="fas fa-apple-alt"></i><span>Organic local food</span></div>
+                                <div class="highlight-item"><i class="fas fa-home"></i><span>Eco-friendly lodge with traditional design</span></div>
+                                <div class="highlight-item"><i class="fas fa-leaf"></i><span>Peaceful jungle atmosphere</span></div>
                             </div>
                         </div>
                         <button class="book-package-btn" onclick="bookPackage('3 Days / 4 Nights Ultimate Safari', 18500)">
@@ -2040,7 +2267,7 @@
                 </button>
             </div>
 
-            <!-- GALLERY PREVIEW -->
+            <!-- GALLERY PREVIEW - Dynamic from Firebase -->
             <div class="gallery-preview">
                 <div class="preview-header">
                     <h3><i class="fas fa-camera-retro"></i> Jungle Moments</h3>
@@ -2071,13 +2298,13 @@
                     </div>
                 </div>
                 <div class="menu-preview">
-                    <div class="menu-item"><img src="https://images.unsplash.com/photo-1626777552784-797072dfaf64?w=300&h=200&fit=crop" alt="Dhikri"><h4>Dhikri</h4><p>Rice flour bread</p></div>
+                    <div class="menu-item"><img src="food/images.jpg" alt="Dhikri"><h4>Dhikri</h4><p>Rice flour bread</p></div>
                     <div class="menu-item"><img src="https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=300&h=200&fit=crop" alt="Ghonghi"><h4>Ghonghi</h4><p>Snail curry</p></div>
-                    <div class="menu-item"><img src="https://images.unsplash.com/photo-1626132647523-66b06c92dff9?w=300&h=200&fit=crop" alt="Bagiya"><h4>Bagiya</h4><p>Lentil dumplings</p></div>
+                    <div class="menu-item"><img src="food/maxresdefault.jpg" alt="Bagiya"><h4>Bagiya</h4><p>Lentil dumplings</p></div>
                 </div>
             </div>
 
-            <!-- COMPACT REVIEWS SECTION WITH AUTO-SCROLL -->
+            <!-- REVIEWS SECTION -->
             <div class="reviews-compact" id="reviews">
                 <div class="reviews-header">
                     <h3>
@@ -2089,11 +2316,9 @@
                     </h3>
                     <p style="font-size: 0.8rem; color: #4a5568; margin-top: 0.3rem;">1,247+ reviews on Google Maps</p>
                 </div>
-
                 <div class="reviews-scroll-container">
                     <div class="reviews-scroll" id="reviewsScroll"></div>
                 </div>
-
                 <div class="view-all-link">
                     <a href="https://www.google.com/maps/place/Wild+Roots+Jungle+Safari+Lodge/@27.5707039,84.2356505,17z/" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-google"></i> Read all reviews on Google Maps
@@ -2113,7 +2338,7 @@
         </main>
     </div>
 
-    <!-- FULL GALLERY PAGE -->
+    <!-- FULL GALLERY PAGE - Dynamic from Firebase -->
     <div class="container full-gallery-page" id="fullGalleryPage">
         <div class="close-gallery-btn" id="closeGalleryBtn">✕</div>
         <div class="gallery-header"><h2>Moments from the Jungle</h2><p>Browse through our complete photo gallery</p></div>
@@ -2291,9 +2516,29 @@
         <button class="booking-button book-detail-btn" data-name="Villa Lodge" data-price="4500"><i class="fas fa-calendar-check"></i> Book Now</button>
     </div>
 
-    <!-- FOOTER WITH MAP -->
+    <div class="container detail-page" id="detail-junglewalk">
+        <div class="detail-close close-detail-btn">✕</div>
+        <span class="detail-badge">ADVENTURE</span>
+        <h2 class="detail-title">Jungle Walking</h2>
+        <div class="detail-rating"><span class="stars">★★★★★</span><span class="reviews">4.9 (234 reviews)</span></div>
+        <div class="detail-image-gallery">
+            <div class="main-image"><img src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?w=800&h=500&fit=crop" class="lightbox-trigger"></div>
+            <div class="side-images"><img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=250&fit=crop" class="lightbox-trigger"><img src="https://images.unsplash.com/photo-1505229061016-24751d664d98?w=400&h=250&fit=crop" class="lightbox-trigger"></div>
+        </div>
+        <div class="detail-video"><video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video></div>
+        <div class="detail-price" id="jungleWalkPrice">₹1,500</div>
+        <div class="detail-description"><p><strong>Explore the jungle on foot with our expert naturalist guides</strong> Experience the thrill of walking through the pristine forests of Chitwan National Park. Learn about medicinal plants, animal tracks, and enjoy close encounters with wildlife in their natural habitat.</p><p>✅ Guided by expert naturalists<br>✅ Learn about local flora and fauna<br>✅ Spot animal tracks and signs<br>✅ Small group experience (max 6 people)<br>✅ Safety briefing and equipment provided</p></div>
+        <button class="booking-button book-detail-btn" data-name="Jungle Walking" data-price="1500"><i class="fas fa-calendar-check"></i> Book Now</button>
+    </div>
+
+    <!-- FOOTER WITH CIRCULAR LOGO -->
     <footer>
         <div class="container">
+            <div class="footer-logo-circle">
+                <div class="footer-circle" id="footerLogo" onclick="window.location.href='#home'">
+                 <img src="WhatsApp Image 2026-03-23 at 7.47.15 PM.jpeg" alt="Wild Roots Logo">
+                </div>
+            </div>
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>WILD ROOTS Jungle Safari</h4>
@@ -2345,7 +2590,90 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        // Reviews Data for auto-scroll section
+        // Load Logo from Firebase
+        function loadLogo() {
+            database.ref('admin/logo').once('value', snap => {
+                if(snap.exists() && snap.val().url) {
+                    const logoUrl = snap.val().url;
+                    const headerLogo = document.getElementById('headerLogo');
+                    const footerLogo = document.getElementById('footerLogo');
+                    if(headerLogo) {
+                        headerLogo.innerHTML = `<img src="${logoUrl}" alt="Wild Roots Logo">`;
+                    }
+                    if(footerLogo) {
+                        footerLogo.innerHTML = `<img src="${logoUrl}" alt="Wild Roots Logo">`;
+                    }
+                }
+            });
+        }
+
+        // Load Activity Images from Firebase
+        function loadActivityImages() {
+            return new Promise((resolve) => {
+                database.ref('admin/activityImages').once('value', snap => {
+                    let activityImages = {
+                        jeep: "WhatsApp Image 2026-03-09 at 7.48.10 PM.jpeg",
+                        canoe: "canan ride/WhatsApp Image 2026-03-09 at 7.48.18 PM.jpeg",
+                        bird: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=500&h=350&fit=crop",
+                        tharu: "tharu culture/Tharu-culture.jpg",
+                        junglewalk: "WhatsApp Image 2026-03-25 at 2.23.29 PM.jpeg",
+                        villa: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=350&fit=crop"
+                    };
+                    if(snap.exists()) {
+                        const images = snap.val();
+                        if(images.jeep) activityImages.jeep = images.jeep;
+                        if(images.canoe) activityImages.canoe = images.canoe;
+                        if(images.bird) activityImages.bird = images.bird;
+                        if(images.tharu) activityImages.tharu = images.tharu;
+                        if(images.junglewalk) activityImages.junglewalk = images.junglewalk;
+                        if(images.villa) activityImages.villa = images.villa;
+                    }
+                    resolve(activityImages);
+                });
+            });
+        }
+
+        // Load Gallery Images from Firebase
+        function loadGallery() {
+            database.ref('gallery').once('value', snap => {
+                let images = [];
+                if(snap.exists()) {
+                    Object.values(snap.val()).forEach(img => {
+                        images.push(img);
+                    });
+                }
+                displayGalleryPreview(images);
+                displayFullGallery(images);
+            });
+        }
+
+        function displayGalleryPreview(images) {
+            const previewGrid = document.getElementById('previewGrid');
+            if(!previewGrid) return;
+            if(images.length === 0) {
+                previewGrid.innerHTML = '<div class="empty-state"><i class="fas fa-images"></i><p>Gallery coming soon</p></div>';
+                return;
+            }
+            const previewImages = images.slice(0, 5);
+            previewGrid.innerHTML = previewImages.map(img => `<img src="${img.url}" class="lightbox-trigger" alt="${img.title}">`).join('');
+        }
+
+        function displayFullGallery(images) {
+            const galleryGrid = document.getElementById('galleryGrid');
+            if(!galleryGrid) return;
+            if(images.length === 0) {
+                galleryGrid.innerHTML = '<div class="empty-state"><i class="fas fa-images"></i><p>No images in gallery yet</p></div>';
+                return;
+            }
+            galleryGrid.innerHTML = images.map(img => `
+                <div class="gallery-item" data-category="${img.category || 'general'}">
+                    <img src="${img.url}" class="lightbox-trigger" alt="${img.title}">
+                    <div class="gallery-overlay">${img.title || 'Gallery Image'}</div>
+                </div>
+            `).join('');
+        }
+
+        // Reviews Data
         const reviewsData = [
             { name: "Sarah Mitchell", initial: "S", rating: 5, text: "Amazing experience! Saw rhinos and elephants. The guides were incredibly knowledgeable. Highly recommend the jeep safari at sunrise!", date: "2 weeks ago", safari: "Jeep Safari" },
             { name: "Michael Chen", initial: "M", rating: 5, text: "Best bird watching tour I've ever done. Spotted over 40 species including the rare Bengal Florican. Krishna is an expert guide!", date: "3 weeks ago", safari: "Bird Watching" },
@@ -2379,35 +2707,23 @@
                         </div>
                         <div class="review-text">"${review.text}"</div>
                         <div class="review-meta">
-                            <span class="review-date"><i class="far fa-calendar-alt" style="font-size: 0.6rem;"></i> ${review.date}</span>
+                            <span class="review-date"><i class="far fa-calendar-alt"></i> ${review.date}</span>
                             <span class="google-badge"><i class="fab fa-google"></i> ${review.safari}</span>
                         </div>
                     </div>
                 `;
             });
             container.innerHTML = html;
-            // Set animation duration based on number of reviews
-            const scrollContainer = document.querySelector('.reviews-scroll');
-            if (scrollContainer) {
-                scrollContainer.style.animationDuration = `${allReviews.length * 0.8}s`;
-            }
         }
 
-        // Go to Top Button Functionality
+        // Go to Top Button
         const goTopBtn = document.getElementById('goTopBtn');
         window.addEventListener('scroll', () => {
-            if (goTopBtn) {
-                goTopBtn.classList.toggle('visible', window.pageYOffset > 300);
-            }
+            if (goTopBtn) goTopBtn.classList.toggle('visible', window.pageYOffset > 300);
         });
-        if (goTopBtn) {
-            goTopBtn.addEventListener('click', (e) => { 
-                e.preventDefault(); 
-                window.scrollTo({ top: 0, behavior: 'smooth' }); 
-            });
-        }
+        goTopBtn.addEventListener('click', (e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-        let currentPrices = { villa: 4500, jeep: 1800, canoe: 1200, bird: 1200, tharu: 600 };
+        let currentPrices = { villa: 4500, jeep: 1800, canoe: 1200, bird: 1200, tharu: 600, junglewalk: 1500 };
         let sliderSlides = [
             { img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1600&q=80", title: "Experience The Wild", desc: "in Elegant Comfort", subdesc: "Chitwan National Park • Tharu Culture • Jungle Safari" },
             { img: "https://images.unsplash.com/photo-1505229061016-24751d664d98?w=1600&q=80", title: "Jungle Safari", desc: "by Canoe & Jeep", subdesc: "Spot rhinos, crocodiles & exotic birds" },
@@ -2430,14 +2746,13 @@
                 }
                 renderSlider();
                 startAutoSlide();
-            }).catch(err => console.error("Error loading slider:", err));
+            });
         }
 
         function renderSlider() {
             const wrapper = document.getElementById('slidesWrapper');
             const dotsContainer = document.getElementById('sliderDots');
             if(!wrapper) return;
-            
             wrapper.innerHTML = sliderSlides.map(slide => `
                 <div class="slide" style="background-image: url('${slide.img}')">
                     <div class="slide-content">
@@ -2446,21 +2761,15 @@
                     </div>
                 </div>
             `).join('');
-            
             dotsContainer.innerHTML = sliderSlides.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></div>`).join('');
         }
 
         let currentSlide = 0;
-        
         function goToSlide(index) {
             currentSlide = index;
             const wrapper = document.getElementById('slidesWrapper');
-            if(wrapper) {
-                wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
-            }
-            document.querySelectorAll('.dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentSlide);
-            });
+            if(wrapper) wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
         }
         
         function startAutoSlide() {
@@ -2480,13 +2789,13 @@
                     if(p.canoe) currentPrices.canoe = p.canoe;
                     if(p.bird) currentPrices.bird = p.bird;
                     if(p.tharu) currentPrices.tharu = p.tharu;
+                    if(p.junglewalk) currentPrices.junglewalk = p.junglewalk;
                 }
                 updateAllPrices();
-            }).catch(err => console.error("Error loading prices:", err));
+            });
         }
 
         function updateAllPrices() {
-            // Update activity cards
             document.querySelectorAll('.activity-card').forEach(card => {
                 const title = card.querySelector('h3')?.innerText;
                 let priceElement = card.querySelector('.price');
@@ -2494,10 +2803,10 @@
                 else if(title === 'Canoe Ride') priceElement.innerText = `₹${currentPrices.canoe}`;
                 else if(title === 'Bird Watching') priceElement.innerText = `₹${currentPrices.bird}`;
                 else if(title === 'Tharu Night') priceElement.innerText = `₹${currentPrices.tharu}`;
+                else if(title === 'Jungle Walking') priceElement.innerText = `₹${currentPrices.junglewalk}`;
                 else if(title === 'Villa Lodge') priceElement.innerText = `₹${currentPrices.villa}`;
             });
             
-            // Update combo items
             document.querySelectorAll('.combo-item').forEach(item => {
                 const name = item.getAttribute('data-name');
                 let priceSpan = item.querySelector('.combo-item-info p');
@@ -2505,34 +2814,38 @@
                 else if(name === 'Canoe Ride') priceSpan.innerText = `₹${currentPrices.canoe}`;
                 else if(name === 'Bird Watching') priceSpan.innerText = `₹${currentPrices.bird}`;
                 else if(name === 'Tharu Night') priceSpan.innerText = `₹${currentPrices.tharu}`;
+                else if(name === 'Jungle Walking') priceSpan.innerText = `₹${currentPrices.junglewalk}`;
                 else if(name === 'Villa Lodge') priceSpan.innerText = `₹${currentPrices.villa}`;
-                item.setAttribute('data-price', currentPrices[name === 'Jeep Safari' ? 'jeep' : name === 'Canoe Ride' ? 'canoe' : name === 'Bird Watching' ? 'bird' : name === 'Tharu Night' ? 'tharu' : 'villa']);
+                item.setAttribute('data-price', currentPrices[name === 'Jeep Safari' ? 'jeep' : name === 'Canoe Ride' ? 'canoe' : name === 'Bird Watching' ? 'bird' : name === 'Tharu Night' ? 'tharu' : name === 'Jungle Walking' ? 'junglewalk' : 'villa']);
             });
             
-            // Update detail pages
             const jeepPrice = document.getElementById('jeepPrice');
             const canoePrice = document.getElementById('canoePrice');
             const birdPrice = document.getElementById('birdPrice');
             const tharuPrice = document.getElementById('tharuPrice');
             const villaPrice = document.getElementById('villaPrice');
+            const jungleWalkPrice = document.getElementById('jungleWalkPrice');
             
             if(jeepPrice) jeepPrice.innerText = `₹${currentPrices.jeep}`;
             if(canoePrice) canoePrice.innerText = `₹${currentPrices.canoe}`;
             if(birdPrice) birdPrice.innerText = `₹${currentPrices.bird}`;
             if(tharuPrice) tharuPrice.innerText = `₹${currentPrices.tharu}`;
             if(villaPrice) villaPrice.innerText = `₹${currentPrices.villa}`;
+            if(jungleWalkPrice) jungleWalkPrice.innerText = `₹${currentPrices.junglewalk}`;
             
             renderComboList();
         }
 
-        // Load activities grid
-        function renderActivities() {
+        // Load activities grid with dynamic images
+        async function renderActivities() {
+            const activityImages = await loadActivityImages();
             const activities = [
-                { name: 'Jeep Safari', priceKey: 'jeep', img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=500&h=350&fit=crop', id: 'jeep', showPrice: false },
-                { name: 'Canoe Ride', priceKey: 'canoe', img: 'https://images.unsplash.com/photo-1505229061016-24751d664d98?w=500&h=350&fit=crop', id: 'canoe', showPrice: false },
-                { name: 'Bird Watching', priceKey: 'bird', img: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=500&h=350&fit=crop', id: 'bird', showPrice: false },
-                { name: 'Tharu Night', priceKey: 'tharu', img: 'https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=500&h=350&fit=crop', id: 'tharu', showPrice: false },
-                { name: 'Villa Lodge', priceKey: 'villa', img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=500&h=350&fit=crop', id: 'villa', showPrice: true }
+                { name: 'Jeep Safari', priceKey: 'jeep', img: activityImages.jeep, id: 'jeep', showPrice: false },
+                { name: 'Canoe Ride', priceKey: 'canoe', img: activityImages.canoe, id: 'canoe', showPrice: false },
+                { name: 'Bird Watching', priceKey: 'bird', img: activityImages.bird, id: 'bird', showPrice: false },
+                { name: 'Tharu Night', priceKey: 'tharu', img: activityImages.tharu, id: 'tharu', showPrice: false },
+                { name: 'Jungle Walking', priceKey: 'junglewalk', img: activityImages.junglewalk, id: 'junglewalk', showPrice: false },
+                { name: 'Villa Lodge', priceKey: 'villa', img: activityImages.villa, id: 'villa', showPrice: true }
             ];
             const grid = document.getElementById('activitiesGrid');
             if(grid) {
@@ -2552,13 +2865,13 @@
             }
         }
 
-        // Render combo list
         function renderComboList() {
             const combos = [
                 { name: 'Jeep Safari', priceKey: 'jeep' },
                 { name: 'Canoe Ride', priceKey: 'canoe' },
                 { name: 'Bird Watching', priceKey: 'bird' },
                 { name: 'Tharu Night', priceKey: 'tharu' },
+                { name: 'Jungle Walking', priceKey: 'junglewalk' },
                 { name: 'Villa Lodge', priceKey: 'villa' }
             ];
             const container = document.getElementById('comboActivitiesList');
@@ -2643,9 +2956,7 @@
             }
         }
 
-        // Package type switching
         function showPackageType(type) {
-            // Hide all package contents
             const customCombo = document.getElementById('custom-combo');
             const package2d = document.getElementById('package-2d');
             const package3d = document.getElementById('package-3d');
@@ -2654,7 +2965,6 @@
             if(package2d) package2d.style.display = 'none';
             if(package3d) package3d.style.display = 'none';
             
-            // Show selected package
             if(type === 'custom') {
                 if(customCombo) customCombo.style.display = 'block';
             } else if(type === 'package2d') {
@@ -2663,14 +2973,15 @@
                 if(package3d) package3d.style.display = 'block';
             }
             
-            // Update active tab
-            document.querySelectorAll('.package-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            event.target.classList.add('active');
+            const activeTab = event?.target;
+            if(activeTab) {
+                document.querySelectorAll('.package-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                activeTab.classList.add('active');
+            }
         }
 
-        // Book package function
         function bookPackage(packageName, packagePrice) {
             currentBookingType = "single";
             currentSingleActivity = { name: packageName, price: packagePrice };
@@ -2822,29 +3133,15 @@
             }
         }
 
-        function initGallery() {
-            const previewGrid = document.getElementById('previewGrid');
-            const galleryGrid = document.getElementById('galleryGrid');
-            const galleryItems = [
-                { src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop', category: 'wildlife', title: 'Jeep Safari' },
-                { src: 'https://images.unsplash.com/photo-1505229061016-24751d664d98?w=400&h=300&fit=crop', category: 'wildlife', title: 'Canoe Ride' },
-                { src: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=400&h=300&fit=crop', category: 'wildlife', title: 'Bird Watching' },
-                { src: 'https://images.unsplash.com/photo-1529225596519-1262d0bfc242?w=400&h=300&fit=crop', category: 'culture', title: 'Tharu Dance' },
-                { src: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop', category: 'accommodation', title: 'Villa Lodge' }
-            ];
-            if(previewGrid) previewGrid.innerHTML = galleryItems.map(item => `<img src="${item.src}" class="lightbox-trigger">`).join('');
-            
-            const fullGalleryItems = [...galleryItems, 
-                { src: 'https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=400&h=400&fit=crop', category: 'culture', title: 'Village Life' },
-                { src: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&h=400&fit=crop', category: 'accommodation', title: 'Deluxe Room' }
-            ];
-            if(galleryGrid) galleryGrid.innerHTML = fullGalleryItems.map(item => `
-                <div class="gallery-item" data-category="${item.category}">
-                    <img src="${item.src}" class="lightbox-trigger">
-                    <div class="gallery-overlay">${item.title}</div>
-                </div>
-            `).join('');
+        function filterGallery(category, btn) {
+            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.style.display = (category === 'all' || item.dataset.category === category) ? 'block' : 'none';
+            });
         }
+
+        function openInstagram(e) { e.preventDefault(); alert('Opening Instagram: @wildrootsjunglesafari'); }
 
         function showMainPage() {
             const mainSections = document.getElementById('mainPageSections');
@@ -2865,6 +3162,7 @@
             if(mainSections) mainSections.style.display = 'none';
             if(fullGallery) fullGallery.style.display = 'block';
             detailPages.forEach(p => p.style.display = 'none');
+            loadGallery();
             window.scrollTo(0, 0);
         }
 
@@ -2879,16 +3177,6 @@
             if(target) target.style.display = 'block';
             window.scrollTo(0, 0);
         }
-
-        function filterGallery(category, btn) {
-            document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.style.display = (category === 'all' || item.dataset.category === category) ? 'block' : 'none';
-            });
-        }
-
-        function openInstagram(e) { e.preventDefault(); alert('Opening Instagram: @wildrootsjunglesafari'); }
 
         // Event Listeners
         document.querySelectorAll('.sidebar-link').forEach(link => {
@@ -2946,11 +3234,12 @@
         if(lightbox) lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.classList.remove('active'); });
 
         // Initialize all
+        loadLogo();
         loadPrices();
         loadSlider();
         renderActivities();
         renderComboList();
-        initGallery();
+        loadGallery();
         displayReviews();
         showMainPage();
         
