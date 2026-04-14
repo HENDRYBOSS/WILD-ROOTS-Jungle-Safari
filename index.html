@@ -42,7 +42,8 @@
     <meta name="geo.position" content="27.5707;84.2357">
     <meta name="ICBM" content="27.5707, 84.2357">
     
-    <!-- ========== SCHEMA MARKUP (Structured Data) ========== -->
+    <!-- ========== SCHEMA MARKUP (Structured Data) - FIXED ========== -->
+    <!-- Single valid JSON-LD block for TouristDestination -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -72,14 +73,20 @@
         "https://www.facebook.com/wildrootsjunglesafari"
       ],
       "aggregateRating": {
-      
-  
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "156"
+      }
+    }
+    </script>
     
+    <!-- Second valid JSON-LD block for LocalBusiness (separate script) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Wild Roots Jungle Safari Lodge",
+      "image": "https://wildrootsjunglesafari.com/images/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bachhauli",
