@@ -14,7 +14,7 @@
     <meta name="googlebot" content="index, follow">
     <meta name="language" content="English">
     
-    <!-- ========== CANONICAL URL - FIXED ========== -->
+    <!-- ========== CANONICAL URL ========== -->
     <link rel="canonical" href="https://wildrootsjunglesafari.com/">
     
     <!-- Google Site Verification -->
@@ -39,17 +39,18 @@
     <!-- Geo Location for Local SEO -->
     <meta name="geo.region" content="NP">
     <meta name="geo.placename" content="Chitwan, Sauraha">
-    <meta name="geo.position" content="27.5707;84.2357">
-    <meta name="ICBM" content="27.5707, 84.2357">
+    <meta name="geo.position" content="27.5707039;84.2356505">
+    <meta name="ICBM" content="27.5707039, 84.2356505">
     
-    <!-- ========== SCHEMA MARKUP (Structured Data) - FIXED ========== -->
-    <!-- Single valid JSON-LD block for TouristDestination -->
+    <!-- ========== FIXED STRUCTURED DATA (JSON-LD) ========== -->
+    <!-- Main Organization/LocalBusiness Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TouristDestination",
-      "name": "Wild Roots Jungle Safari",
+      "@type": "LocalBusiness",
+      "name": "Wild Roots Jungle Safari Lodge",
       "description": "Family-run retreat in Bachhauli village, gateway to Chitwan National Park offering authentic Tharu hospitality and jungle safaris. Over 15 years of experience in responsible tourism.",
+      "image": "https://wildrootsjunglesafari.com/images/og-image.jpg",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bachhauli",
@@ -75,18 +76,45 @@
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.8",
-        "reviewCount": "156"
+        "reviewCount": "156",
+        "bestRating": "5",
+        "worstRating": "1"
       }
     }
     </script>
     
-    <!-- Second valid JSON-LD block for LocalBusiness (separate script) -->
+    <!-- Tourist Destination Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "TouristDestination",
+      "name": "Wild Roots Jungle Safari",
+      "description": "Experience authentic Tharu culture and wildlife safaris at Chitwan National Park. Best jungle safari experience with expert guides.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bachhauli",
+        "addressLocality": "Sauraha",
+        "addressRegion": "Chitwan",
+        "postalCode": "44200",
+        "addressCountry": "NP"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "27.5707039",
+        "longitude": "84.2356505"
+      },
+      "telephone": "+9779841234567",
+      "url": "https://wildrootsjunglesafari.com/"
+    }
+    </script>
+    
+    <!-- Accommodation Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
       "name": "Wild Roots Jungle Safari Lodge",
-      "image": "https://wildrootsjunglesafari.com/images/og-image.jpg",
+      "description": "Eco-friendly jungle lodge with traditional Tharu hospitality",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bachhauli",
@@ -96,7 +124,12 @@
       },
       "telephone": "+9779841234567",
       "priceRange": "₹₹",
-      "url": "https://wildrootsjunglesafari.com/"
+      "url": "https://wildrootsjunglesafari.com/",
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "4.5",
+        "bestRating": "5"
+      }
     }
     </script>
     
