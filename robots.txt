@@ -1,3 +1,14 @@
+# robots.txt for Wild Roots Jungle Safari
 User-agent: *
 Allow: /
-Sitemap: https://wild-roots-jungle-safari.vercel.app/sitemap.xml
+
+# Sitemap location
+Sitemap: https://wildrootsjunglesafari.com/sitemap.xml
+
+# Disallow admin pages
+Disallow: /admin/
+Disallow: /booking-lightbox/
+Disallow: /api/
+
+# Crawl delay for slower servers
+Crawl-delay: 1
