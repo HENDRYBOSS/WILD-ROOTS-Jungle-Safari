@@ -10,6 +10,17 @@
           "value": "wild-roots-jungle-safari-hs42ngta5-hendryboss-projects.vercel.app"
         }
       ]
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://wildrootsjunglesafari.com/$1",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "www.wildrootsjunglesafari.com"
+        }
+      ]
     }
   ]
 }
